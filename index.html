@@ -1,1 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Corporate Finance 201 — London Track</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Source+Sans+3:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] },
+  svg: { fontCache: 'global' }
+};
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<style>
+:root {
+  --salmon: #FFF1E5;
+  --salmon-dark: #F2DFCE;
+  --cream: #FBF4ED;
+  --rose: #F2D5C4;
+  --rose-deep: #E8C4B0;
+  --terracotta: #C97B5A;
+  --ink: #1A1A1A;
+  --body: #33302E;
+  --muted: #6B6B6B;
+  --rule: #CCC1B7;
+  --accent: #990F3D;
+  --accent-light: #B8174E;
+  --teal: #0D7680;
+  --teal-light: #E8F0EE;
+  --green: #0A6E5C;
+  --highlight: rgba(153,15,61,0.06);
+  --card-bg: #FFFAF5;
+  --example-bg: #F6F1EB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+::selection { background: var(--accent); color: white; }
+
+body {
+  background: var(--salmon);
+  color: var(--body);
+  font-family: 'Crimson Pro', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  text-align: center;
+  padding: 28px 24px 16px;
+  border-bottom: 1px solid var(--rule);
+}
+.masthead h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 900;
+  font-size: 36px;
+  color: var(--ink);
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+.masthead .track {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+.edition-bar {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  padding: 6px 0;
+  border-bottom: 4px double var(--rule);
+  letter-spacing: 0.5px;
+}
+
+/* ── TABS ── */
+.tabs-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--salmon);
+  border-bottom: 1px solid var(--rule);
+  transition: box-shadow 0.3s;
+}
+.tabs-wrap.scrolled { box-shadow: 0 3px 16px rgba(0,0,0,0.08); }
+.tabs {
+  display: flex;
+  max-width: 960px;
+  margin: 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 10px 4px 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.2s;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--accent); font-weight: 700; }
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 12%; right: 12%;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+}
+.tab-num {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 1px;
+}
+
+/* ── CONTENT PANELS ── */
+.panel { display: none; }
+.panel.active {
+  display: block;
+  animation: fadeUp 0.4s ease forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── ARTICLE LAYOUT ── */
+.article {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 36px 24px 72px;
+}
+
+/* Hero */
+.hero { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--rule); }
+.hero-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: var(--ink);
+  line-height: 1.12;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+.hero .subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 20px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.hero .lede {
+  font-size: 18px;
+  line-height: 1.8;
+}
+.hero .lede::first-letter {
+  font-family: 'Playfair Display', serif;
+  float: left;
+  font-size: 62px;
+  font-weight: 900;
+  line-height: 0.82;
+  padding-right: 8px;
+  padding-top: 6px;
+  color: var(--accent);
+}
+
+/* Section headings */
+.section { margin-bottom: 36px; }
+.section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  line-height: 1.3;
+}
+.section:first-of-type h3 { border-top: none; padding-top: 0; }
+.section h4 {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--teal);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 20px 0 8px;
+}
+.section p { margin-bottom: 14px; }
+
+/* ── SPECIAL BOXES — ALL-SALMON PALETTE ── */
+
+/* Formula box: warm cream, accent border */
+.formula-box {
+  background: var(--cream);
+  color: var(--body);
+  padding: 24px 28px;
+  border-radius: 2px;
+  margin: 20px 0;
+  border-left: 4px solid var(--accent);
+  text-align: center;
+  font-size: 18px;
+  overflow-x: auto;
+}
+.formula-box .label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  text-align: left;
+}
+.formula-box .sub-note {
+  font-size: 14px;
+  margin-top: 10px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* Example box: slightly deeper cream, teal border */
+.example-box {
+  background: var(--example-bg);
+  padding: 24px 28px;
+  margin: 20px 0;
+  border-left: 4px solid var(--teal);
+  border-radius: 2px;
+}
+.example-box .ex-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+.example-box .ex-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+.example-box p { margin-bottom: 10px; }
+
+/* Key insight: light rose tint */
+.insight {
+  background: var(--highlight);
+  border-left: 4px solid var(--accent);
+  padding: 18px 24px;
+  margin: 20px 0;
+  border-radius: 2px;
+}
+.insight .ins-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+/* Principle box: muted rose, no dark background */
+.principle {
+  background: var(--rose);
+  color: var(--ink);
+  padding: 24px 28px;
+  margin: 20px 0;
+  border-radius: 2px;
+  text-align: center;
+  border: 1px solid var(--rose-deep);
+}
+.principle .num {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.principle .statement {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+/* Table of Contents */
+.toc {
+  background: var(--salmon-dark);
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  border-left: 3px solid var(--accent);
+}
+.toc-title {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.toc-item {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 14px;
+  color: var(--body);
+  padding: 3px 0;
+}
+.toc-num {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 8px;
+}
+
+/* ── SVG CHARTS ── */
+.chart-wrap {
+  margin: 24px 0;
+  text-align: center;
+  overflow-x: auto;
+}
+.chart-wrap svg { max-width: 100%; height: auto; }
+.chart-caption {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* ── DATA TABLES — warm alternating rows ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 14px;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.data-table th {
+  background: var(--salmon-dark);
+  color: var(--accent);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--rule);
+}
+.data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.data-table tr:nth-child(even) td { background: var(--cream); }
+.data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ── RATIO GRID ── */
+.ratio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 20px 0;
+}
+.ratio-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  padding: 18px 20px;
+  border-radius: 2px;
+}
+.ratio-card .rc-label {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+.ratio-card .rc-formula {
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.ratio-card .rc-desc {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ── NAVIGATION ── */
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 4px double var(--rule);
+}
+.nav-btn {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  border: 1px solid var(--accent);
+  padding: 8px 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+}
+.nav-btn:hover { background: var(--accent); color: white; }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.nav-btn:disabled:hover { background: none; color: var(--accent); }
+.nav-progress {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 28px;
+  border-top: 1px solid var(--rule);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .masthead h1 { font-size: 26px; }
+  .hero h2 { font-size: 30px; }
+  .hero .subtitle { font-size: 17px; }
+  .article { padding: 24px 16px 48px; }
+  .formula-box { padding: 18px 16px; font-size: 15px; }
+  .example-box { padding: 18px 16px; }
+  .tab-btn { min-width: 56px; font-size: 8.5px; }
+  .ratio-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ MASTHEAD ════════════════ -->
+<header class="masthead">
+  <h1>Corporate Finance 201</h1>
+  <div class="track">London Track</div>
+</header>
+<div class="edition-bar">Professor Terence Tse · 2024 Edition</div>
+
+<!-- ════════════════ TABS ════════════════ -->
+<nav class="tabs-wrap" id="tabsWrap">
+  <div class="tabs" id="tabsBar"></div>
+</nav>
+
+<!-- ═══════════ TAB I: FINANCIAL STATEMENT ANALYSIS ═══════════ -->
+<div class="panel" id="panel-0">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject I</div>
+  <h2>Financial Statement Analysis</h2>
+  <div class="subtitle">Reading the health of a firm</div>
+  <p class="lede">The toolkit for interpreting a company's financial condition — ratio analysis across leverage, liquidity, efficiency, profitability, and market value. Financial analysis evaluates the viability, stability, and profitability of a business by examining the relationships between different pieces of financial information, over time and against industry benchmarks.</p>
+</div>
+
+<div class="toc">
+  <div class="toc-title">In this section</div>
+  <div class="toc-item"><span class="toc-num">1.</span>Methods of Financial Analysis</div>
+  <div class="toc-item"><span class="toc-num">2.</span>Leverage Ratios</div>
+  <div class="toc-item"><span class="toc-num">3.</span>Liquidity Ratios</div>
+  <div class="toc-item"><span class="toc-num">4.</span>Efficiency Ratios</div>
+  <div class="toc-item"><span class="toc-num">5.</span>Profitability Ratios</div>
+  <div class="toc-item"><span class="toc-num">6.</span>Market-to-Value Ratios</div>
+  <div class="toc-item"><span class="toc-num">7.</span>DuPont Analysis</div>
+</div>
+
+<div class="section">
+<h3>1. Methods of Financial Analysis</h3>
+<p>Financial analysis can be achieved through three principal methods: ratio analysis (the most common), valuation through cash flows and comparables, and competitive benchmarking. Ratio analysis allows comparison <em>over time</em> (time-series) and <em>across firms</em> (cross-sectional), with measurements expressed as percentages, multiples, or number of days.</p>
+</div>
+
+<div class="section">
+<h3>2. Leverage Ratios</h3>
+<p>Leverage ratios address a firm's long-term ability to meet its obligations and the degree of financial leverage employed.</p>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">Debt Ratio</div>
+    <div class="rc-formula">$\dfrac{\text{Long-term Debt}}{\text{Long-term Debt} + \text{Equity}}$</div>
+    <div class="rc-desc">Proportion of total capitalisation funded by debt. Higher = more leveraged.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Debt-Equity Ratio</div>
+    <div class="rc-formula">$\dfrac{\text{Long-term Debt}}{\text{Equity}}$</div>
+    <div class="rc-desc">Direct comparison of debt to equity. Can be expressed as ×, %, or as a ratio.</div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h3>3. Liquidity Ratios</h3>
+<p>Liquidity ratios refer to a firm's ability to satisfy short-term obligations without undue stress.</p>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">Current Ratio</div>
+    <div class="rc-formula">$\dfrac{\text{Current Assets}}{\text{Current Liabilities}}$</div>
+    <div class="rc-desc">Broad measure of short-term solvency. A ratio above 1.0 suggests adequate coverage.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Quick Ratio</div>
+    <div class="rc-formula">$\dfrac{\text{Current Assets} - \text{Inventory}}{\text{Current Liabilities}}$</div>
+    <div class="rc-desc">Conservative view — excludes inventory, which may be illiquid.</div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h3>4. Efficiency Ratios</h3>
+<p>Efficiency ratios measure how intensively a firm uses its assets to generate revenue.</p>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">Asset Turnover</div>
+    <div class="rc-formula">$\dfrac{\text{Sales}}{\text{Total Assets}}$</div>
+    <div class="rc-desc">Revenue generated per unit of assets. Fast-food: ~2.0×; Luxury hotel: ~0.5×.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Inventory Turnover</div>
+    <div class="rc-formula">$\dfrac{\text{COGS}}{\text{Inventory}}$</div>
+    <div class="rc-desc">How quickly inventory is sold and replaced within a period.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Receivables Turnover</div>
+    <div class="rc-formula">$\dfrac{\text{Sales}}{\text{Accounts Receivable}}$</div>
+    <div class="rc-desc">Speed at which the firm collects cash from customers.</div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h3>5. Profitability Ratios</h3>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">Profit Margin</div>
+    <div class="rc-formula">$\dfrac{\text{Net Income}}{\text{Sales}}$</div>
+    <div class="rc-desc">How much of each £ of revenue becomes profit.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Return on Assets</div>
+    <div class="rc-formula">$\text{ROA} = \dfrac{\text{Net Income}}{\text{Total Assets}}$</div>
+    <div class="rc-desc">Profit generated per unit of assets employed.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Return on Equity</div>
+    <div class="rc-formula">$\text{ROE} = \dfrac{\text{Net Income}}{\text{Shareholders' Equity}}$</div>
+    <div class="rc-desc">Return earned on the capital shareholders have invested.</div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h3>6. Market-to-Value Ratios</h3>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">Price-Earnings Ratio</div>
+    <div class="rc-formula">$\text{P/E} = \dfrac{\text{Market Price per Share}}{\text{EPS}}$</div>
+    <div class="rc-desc">How much investors are willing to pay per £1 of earnings.</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Market-to-Book</div>
+    <div class="rc-formula">$\dfrac{\text{Market Price per Share}}{\text{Book Value per Share}}$</div>
+    <div class="rc-desc">Premium (or discount) the market assigns relative to accounting value.</div>
+  </div>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Cross-Sectional Example</div>
+  <div class="ex-title">UK Banks — P/E Comparison (2004)</div>
+  <table class="data-table">
+    <tr><th>Bank</th><th class="num">P/E (2004A)</th><th class="num">P/E (2005E)</th><th class="num">P/E (2006E)</th></tr>
+    <tr><td>Barclays</td><td class="num">9.1×</td><td class="num">9.6×</td><td class="num">8.8×</td></tr>
+    <tr><td>HBOS</td><td class="num">8.9×</td><td class="num">9.5×</td><td class="num">8.9×</td></tr>
+    <tr><td>HSBC</td><td class="num">4.2×</td><td class="num">4.6×</td><td class="num">5.1×</td></tr>
+    <tr><td>Lloyds</td><td class="num">9.9×</td><td class="num">10.5×</td><td class="num">9.7×</td></tr>
+    <tr><td><strong>9 UK Banks Avg</strong></td><td class="num"><strong>10.7×</strong></td><td class="num"><strong>10.5×</strong></td><td class="num"><strong>9.7×</strong></td></tr>
+  </table>
+</div>
+</div>
+
+<div class="section">
+<h3>7. DuPont Analysis</h3>
+<p>The DuPont system links profitability and efficiency ratios to decompose returns into their underlying drivers.</p>
+
+<div class="formula-box">
+  <div class="label">DuPont — Return on Assets</div>
+  $$\text{ROA} = \underbrace{\frac{\text{Sales}}{\text{Total Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Profit Margin}}$$
+</div>
+
+<div class="formula-box">
+  <div class="label">DuPont — Return on Equity (3-part)</div>
+  $$\text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Turnover}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Leverage}}$$
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Two Business Models, Same ROA</div>
+  <table class="data-table">
+    <tr><th>Business</th><th class="num">Asset Turnover</th><th class="num">Profit Margin</th><th class="num">ROA</th></tr>
+    <tr><td>Fast-food chain</td><td class="num">2.0×</td><td class="num">5%</td><td class="num">10%</td></tr>
+    <tr><td>Luxury hotel</td><td class="num">0.5×</td><td class="num">20%</td><td class="num">10%</td></tr>
+  </table>
+  <p>Both businesses achieve 10% ROA, but through entirely different strategies. DuPont reveals that the fast-food chain relies on <strong>high volume</strong> (turnover) while the hotel relies on <strong>high margin</strong>.</p>
+</div>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" style="max-width:560px">
+  <!-- DuPont Tree — all-salmon palette -->
+  <rect x="220" y="10" width="160" height="40" rx="3" fill="#990F3D"/>
+  <text x="300" y="35" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="13" font-weight="700">ROE</text>
+
+  <line x1="300" y1="50" x2="300" y2="75" stroke="var(--rule)" stroke-width="1.5"/>
+  <line x1="100" y1="75" x2="500" y2="75" stroke="var(--rule)" stroke-width="1.5"/>
+  <line x1="100" y1="75" x2="100" y2="95" stroke="var(--rule)" stroke-width="1.5"/>
+  <line x1="300" y1="75" x2="300" y2="95" stroke="var(--rule)" stroke-width="1.5"/>
+  <line x1="500" y1="75" x2="500" y2="95" stroke="var(--rule)" stroke-width="1.5"/>
+
+  <rect x="25" y="95" width="150" height="40" rx="3" fill="var(--terracotta)"/>
+  <text x="100" y="120" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="600">Profit Margin</text>
+
+  <rect x="225" y="95" width="150" height="40" rx="3" fill="var(--teal)"/>
+  <text x="300" y="120" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="600">Asset Turnover</text>
+
+  <rect x="425" y="95" width="150" height="40" rx="3" fill="var(--green)"/>
+  <text x="500" y="120" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="600">Equity Multiplier</text>
+
+  <text x="100" y="155" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13" font-style="italic">Net Income / Sales</text>
+  <text x="300" y="155" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13" font-style="italic">Sales / Assets</text>
+  <text x="500" y="155" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13" font-style="italic">Assets / Equity</text>
+
+  <text x="200" y="120" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="18" font-weight="700">×</text>
+  <text x="400" y="120" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="18" font-weight="700">×</text>
+
+  <!-- Sub-decomposition boxes -->
+  <line x1="100" y1="165" x2="100" y2="185" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="50" y1="185" x2="150" y2="185" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="50" y1="185" x2="50" y2="198" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="150" y1="185" x2="150" y2="198" stroke="var(--rule)" stroke-width="1"/>
+  <rect x="10" y="198" width="80" height="32" rx="2" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="50" y="218" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Net Income</text>
+  <rect x="110" y="198" width="80" height="32" rx="2" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="150" y="218" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Sales</text>
+
+  <line x1="300" y1="165" x2="300" y2="185" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="250" y1="185" x2="350" y2="185" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="250" y1="185" x2="250" y2="198" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="350" y1="185" x2="350" y2="198" stroke="var(--rule)" stroke-width="1"/>
+  <rect x="210" y="198" width="80" height="32" rx="2" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="250" y="218" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Sales</text>
+  <rect x="310" y="198" width="80" height="32" rx="2" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="350" y="218" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Total Assets</text>
+
+  <line x1="500" y1="165" x2="500" y2="185" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="450" y1="185" x2="550" y2="185" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="450" y1="185" x2="450" y2="198" stroke="var(--rule)" stroke-width="1"/>
+  <line x1="550" y1="185" x2="550" y2="198" stroke="var(--rule)" stroke-width="1"/>
+  <rect x="410" y="198" width="80" height="32" rx="2" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="450" y="218" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Total Assets</text>
+  <rect x="510" y="198" width="80" height="32" rx="2" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="550" y="218" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Equity</text>
+</svg>
+<div class="chart-caption">Figure 1.1 — DuPont decomposition tree: ROE = Margin × Turnover × Leverage</div>
+</div>
+</div>
+</article>
+</div>
+
+<!-- ═══════════ TAB II: FOUNDATIONS ═══════════ -->
+<div class="panel" id="panel-1">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject II</div>
+  <h2>Foundations of Corporate Finance</h2>
+  <div class="subtitle">The architecture of financial decision-making</div>
+  <p class="lede">Corporate finance centres on three fundamental questions that every financial manager must answer: in what long-lived assets should the firm invest? How should it raise the cash to fund those investments? And how should it manage day-to-day operating cash flows? These questions define the discipline and shape the value of the firm.</p>
+</div>
+
+<div class="section">
+<h3>The Three Pillars</h3>
+<div class="chart-wrap">
+<svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="max-width:600px">
+  <rect x="10" y="30" width="180" height="140" rx="4" fill="var(--accent)"/>
+  <text x="100" y="65" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="15" font-weight="700">Capital</text>
+  <text x="100" y="82" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="15" font-weight="700">Budgeting</text>
+  <text x="100" y="112" text-anchor="middle" fill="var(--rose)" font-family="Source Sans 3, sans-serif" font-size="11">In what assets should</text>
+  <text x="100" y="126" text-anchor="middle" fill="var(--rose)" font-family="Source Sans 3, sans-serif" font-size="11">the firm invest?</text>
+  <text x="100" y="152" text-anchor="middle" fill="var(--rose)" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">NPV · IRR · FCF</text>
+
+  <rect x="220" y="30" width="180" height="140" rx="4" fill="var(--teal)"/>
+  <text x="310" y="65" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="15" font-weight="700">Capital</text>
+  <text x="310" y="82" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="15" font-weight="700">Structure</text>
+  <text x="310" y="112" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="11">How should the firm</text>
+  <text x="310" y="126" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="11">raise cash?</text>
+  <text x="310" y="152" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">Debt · Equity · WACC</text>
+
+  <rect x="430" y="30" width="180" height="140" rx="4" fill="var(--green)"/>
+  <text x="520" y="65" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="15" font-weight="700">Working</text>
+  <text x="520" y="82" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="15" font-weight="700">Capital</text>
+  <text x="520" y="112" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="11">How to manage</text>
+  <text x="520" y="126" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="11">day-to-day cash?</text>
+  <text x="520" y="152" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">CA − CL</text>
+
+  <text x="310" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="3">THE THREE CONCERNS OF CORPORATE FINANCE</text>
+</svg>
+</div>
+</div>
+
+<div class="section">
+<h3>Financial Markets &amp; the Firm</h3>
+<p>Financial markets serve as the intermediary between the firm and its investors. The firm issues securities (debt and equity) to raise capital, invests in assets, generates cash flows, pays taxes, and distributes the remainder as dividends and debt repayments — or retains them for future investment.</p>
+<div class="chart-wrap">
+<svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" style="max-width:600px">
+  <rect x="30" y="60" width="180" height="120" rx="4" fill="var(--terracotta)"/>
+  <text x="120" y="95" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="14" font-weight="700">THE FIRM</text>
+  <text x="120" y="118" text-anchor="middle" fill="var(--cream)" font-family="Source Sans 3, sans-serif" font-size="10">Current Assets</text>
+  <text x="120" y="132" text-anchor="middle" fill="var(--cream)" font-family="Source Sans 3, sans-serif" font-size="10">Fixed Assets</text>
+  <text x="120" y="155" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">Invests in assets →</text>
+
+  <rect x="430" y="60" width="180" height="120" rx="4" fill="var(--accent)"/>
+  <text x="520" y="95" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="14" font-weight="700">FINANCIAL</text>
+  <text x="520" y="112" text-anchor="middle" fill="white" font-family="Playfair Display, serif" font-size="14" font-weight="700">MARKETS</text>
+  <text x="520" y="135" text-anchor="middle" fill="var(--rose)" font-family="Source Sans 3, sans-serif" font-size="10">Short &amp; long-term debt</text>
+  <text x="520" y="149" text-anchor="middle" fill="var(--rose)" font-family="Source Sans 3, sans-serif" font-size="10">Equity shares</text>
+
+  <rect x="250" y="195" width="140" height="45" rx="3" fill="var(--muted)"/>
+  <text x="320" y="222" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="600">GOVERNMENT</text>
+
+  <defs><marker id="arw" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="var(--accent)"/></marker></defs>
+  <defs><marker id="arwt" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="var(--teal)"/></marker></defs>
+
+  <path d="M210,90 Q320,50 430,90" fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#arw)"/>
+  <text x="320" y="52" text-anchor="middle" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">Firm issues securities</text>
+
+  <path d="M430,150 Q320,190 210,150" fill="none" stroke="var(--teal)" stroke-width="1.8" marker-end="url(#arwt)"/>
+  <text x="320" y="182" text-anchor="middle" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">Cash flow from firm</text>
+
+  <line x1="120" y1="180" x2="250" y2="210" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4"/>
+  <text x="160" y="205" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">Taxes</text>
+</svg>
+<div class="chart-caption">Figure 2.1 — The circular flow of cash between firms, financial markets, and government</div>
+</div>
+</div>
+
+<div class="section">
+<h3>The Agency Problem</h3>
+<p>The corporate form separates ownership (shareholders) from control (managers). This separation enables professional management and facilitates large-scale enterprise, but introduces the <strong>principal-agent problem</strong>: managers may pursue objectives that diverge from shareholders' interests.</p>
+<div class="insight">
+  <div class="ins-label">The Goal of the Firm</div>
+  <p>From the shareholder's viewpoint, the financial manager has one overriding objective: <strong>maximise the value of each share</strong>. This is distinct from profit maximisation — value maximisation accounts for the timing, magnitude, and risk of future cash flows, not merely accounting earnings in a single period.</p>
+</div>
+</div>
+</article>
+</div>
+
+<!-- ═══════════ TAB III: TIME VALUE OF MONEY ═══════════ -->
+<div class="panel" id="panel-2">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject III</div>
+  <h2>Time Value of Money &amp; Investment Decisions</h2>
+  <div class="subtitle">The mechanics of value creation</div>
+  <p class="lede">A pound today is worth more than a pound tomorrow. This deceptively simple insight — the first principle of corporate finance — underpins every valuation, every investment decision, and every financing choice. Because money can be invested to earn a return immediately, cash flows occurring at different points in time cannot be compared directly.</p>
+</div>
+
+<div class="principle">
+  <div class="num">First Principle of Corporate Finance</div>
+  <div class="statement">A pound today is worth more than a pound tomorrow</div>
+</div>
+
+<div class="section">
+<h3>Future Value &amp; Present Value</h3>
+<div class="formula-box">
+  <div class="label">Future Value</div>
+  $$FV = C \times (1 + r)^t$$
+</div>
+<div class="formula-box">
+  <div class="label">Present Value</div>
+  $$PV = \frac{C}{(1 + r)^t}$$
+</div>
+<p>where $C$ is the cash flow, $r$ is the interest (discount) rate, and $t$ is the number of periods.</p>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Compound Interest over 2 Years</div>
+  <p>Deposit £100 at 10% compound interest for 2 years:</p>
+  <p style="text-align:center; font-size:18px;">$FV = £100 \times (1.10)^2 = £121$</p>
+  <p>Conversely, the present value of £121 received in 2 years at 10% is:</p>
+  <p style="text-align:center; font-size:18px;">$PV = \dfrac{£121}{(1.10)^2} = £100$</p>
+</div>
+</div>
+
+<div class="section">
+<h3>Risk &amp; the Discount Rate</h3>
+<div class="principle">
+  <div class="num">Second Principle of Corporate Finance</div>
+  <div class="statement">A safe pound is worth more than a risky pound</div>
+</div>
+<p>Higher risk demands a higher discount rate, reducing present value.</p>
+<div class="formula-box">
+  <div class="label">Required Return</div>
+  $$r_{\text{investment}} = r_{\text{risk-free}} + \text{risk premium}$$
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Impact of Risk on PV</div>
+  <p>A machine will produce £500,000 next year. Cost: £450,000.</p>
+  <table class="data-table">
+    <tr><th>Discount Rate</th><th class="num">PV</th><th>Decision</th></tr>
+    <tr><td>5% (low risk)</td><td class="num">£476,190</td><td style="color:var(--green);font-weight:600">Accept ✓</td></tr>
+    <tr><td>11% (moderate risk)</td><td class="num">£450,450</td><td style="color:var(--green);font-weight:600">Accept ✓ (barely)</td></tr>
+    <tr><td>14% (high risk)</td><td class="num">£438,596</td><td style="color:var(--accent);font-weight:600">Reject ✗</td></tr>
+  </table>
+</div>
+</div>
+
+<div class="section">
+<h3>Net Present Value</h3>
+<div class="formula-box">
+  <div class="label">Net Present Value</div>
+  $$NPV = -C_0 + \sum_{t=1}^{T} \frac{C_t}{(1+r)^t}$$
+</div>
+<div class="insight">
+  <div class="ins-label">Decision Rule</div>
+  <p><strong>NPV &gt; 0</strong> → Accept (the project creates value). <strong>NPV &lt; 0</strong> → Reject (the project destroys value). NPV is additive: NPV(A+B) = NPV(A) + NPV(B).</p>
+</div>
+</div>
+
+<div class="section">
+<h3>Perpetuities &amp; Annuities</h3>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">Perpetuity</div>
+    <div class="rc-formula">$PV = \dfrac{C}{r}$</div>
+    <div class="rc-desc">Constant payment forever</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Growing Perpetuity</div>
+    <div class="rc-formula">$PV = \dfrac{C}{r - g}$</div>
+    <div class="rc-desc">Payment growing at rate g forever</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Annuity</div>
+    <div class="rc-formula">$PV = C \times \dfrac{1 - (1+r)^{-t}}{r}$</div>
+    <div class="rc-desc">Level payment for t periods</div>
+  </div>
+</div>
+</div>
+
+<div class="section">
+<h3>IRR, Payback &amp; Other Criteria</h3>
+<div class="formula-box">
+  <div class="label">Internal Rate of Return</div>
+  $$0 = -C_0 + \sum_{t=1}^{T} \frac{C_t}{(1+IRR)^t}$$
+</div>
+<p><strong>Rule:</strong> Accept if $IRR > r$ (cost of capital). But beware: multiple IRRs with non-conventional cash flows, incorrect rankings for mutually exclusive projects, and cases where IRR simply cannot be computed.</p>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg" style="max-width:480px">
+  <line x1="60" y1="20" x2="60" y2="230" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="60" y1="140" x2="470" y2="140" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="30" y="130" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="11" transform="rotate(-90,30,130)">NPV</text>
+  <text x="470" y="158" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="11">Discount rate</text>
+  <text x="55" y="145" text-anchor="end" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">0</text>
+
+  <path d="M80,40 Q180,60 260,100 Q340,130 360,140 Q400,155 440,190" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+
+  <circle cx="360" cy="140" r="5" fill="var(--accent)"/>
+  <text x="368" y="130" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="700">IRR = 13.1%</text>
+
+  <rect x="80" y="50" width="260" height="12" rx="2" fill="var(--green)" opacity="0.15"/>
+  <text x="210" y="45" text-anchor="middle" fill="var(--green)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">NPV positive — Accept</text>
+
+  <rect x="370" y="152" width="90" height="12" rx="2" fill="var(--accent)" opacity="0.15"/>
+  <text x="415" y="175" text-anchor="middle" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">NPV negative — Reject</text>
+</svg>
+<div class="chart-caption">Figure 3.1 — NPV profile: as the discount rate rises, NPV falls. IRR is where the curve crosses zero.</div>
+</div>
+</div>
+</article>
+</div>
+
+<!-- ═══════════ TAB IV: VALUATION OF SECURITIES ═══════════ -->
+<div class="panel" id="panel-3">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject IV</div>
+  <h2>Valuation of Securities</h2>
+  <div class="subtitle">Pricing equity and debt</div>
+  <p class="lede">Every financial instrument — whether a share of equity or a bond — derives its value from the cash flows it will deliver to its holder, discounted to the present. The mechanics differ between equity and debt, but the principle is identical: price equals the present value of all expected future cash flows.</p>
+</div>
+
+<div class="section">
+<h3>Share Valuation — Dividend Discount Model</h3>
+<div class="formula-box">
+  <div class="label">General Share Pricing</div>
+  $$P_0 = \frac{D_1 + P_1}{(1+r)}$$
+</div>
+<div class="formula-box">
+  <div class="label">Gordon Growth Model</div>
+  $$P_0 = \frac{D_1}{r - g}$$
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Non-Constant Growth Valuation</div>
+  <p>A company pays dividends of $1.30, $1.80, $2.00 in years 1–3. Beyond year 3, dividends grow at 3% forever. Discount rate is 7%.</p>
+  <table class="data-table">
+    <tr><th>Year</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">Beyond 3</th></tr>
+    <tr><td>Dividends</td><td class="num">$1.30</td><td class="num">$1.80</td><td class="num">$2.00</td><td class="num">$2.06 (growing at 3%)</td></tr>
+    <tr><td>Share price at yr 3</td><td class="num">—</td><td class="num">—</td><td class="num" colspan="2">$P_3 = \frac{2.06}{0.07 - 0.03} = \$51.50$</td></tr>
+  </table>
+  <p>Discounting all cash flows: $P_0 = \frac{1.30}{1.07} + \frac{1.80}{1.07^2} + \frac{2.00 + 51.50}{1.07^3} = \$46.46$</p>
+</div>
+</div>
+
+<div class="section">
+<h3>Determinants of r and g</h3>
+<div class="formula-box">
+  <div class="label">Required Return Decomposition</div>
+  $$r = \underbrace{\frac{D_1}{P_0}}_{\text{Dividend Yield}} + \underbrace{g}_{\text{Capital Gain Yield}}$$
+</div>
+<div class="formula-box">
+  <div class="label">Sustainable Growth Rate</div>
+  $$g = b \times ROE$$
+</div>
+<p>where $b$ is the plowback (retention) ratio — the fraction of earnings reinvested rather than paid out as dividends.</p>
+</div>
+
+<div class="section">
+<h3>Bond Valuation</h3>
+<div class="formula-box">
+  <div class="label">Bond Price</div>
+  $$P = \sum_{t=1}^{T} \frac{C}{(1+YTM)^t} + \frac{F}{(1+YTM)^T}$$
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">LVMH Bond Pricing</div>
+  <p>Maturity: 3 years. Face value: €1,000. Coupon rate: 15%. YTM: 6%.</p>
+  <p style="text-align:center;font-size:16px;">$P = \frac{150}{1.06} + \frac{150}{1.06^2} + \frac{150 + 1{,}000}{1.06^3} = €1{,}240.57$</p>
+  <p>Since YTM (6%) &lt; coupon rate (15%), the bond trades at a <strong>premium</strong>.</p>
+</div>
+
+<div class="insight">
+  <div class="ins-label">Bond Pricing Rules</div>
+  <p><strong>Premium:</strong> YTM &lt; Coupon Rate → Price &gt; Face Value<br>
+  <strong>At par:</strong> YTM = Coupon Rate → Price = Face Value<br>
+  <strong>Discount:</strong> YTM &gt; Coupon Rate → Price &lt; Face Value</p>
+</div>
+</div>
+
+<div class="section">
+<h3>Interest Rate Risk</h3>
+<p>Bond prices and interest rates move inversely. Longer maturity and lower coupons amplify sensitivity.</p>
+<div class="chart-wrap">
+<svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" style="max-width:480px">
+  <text x="250" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">INTEREST RATE SENSITIVITY</text>
+  <line x1="60" y1="30" x2="60" y2="220" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="60" y1="220" x2="460" y2="220" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="25" y="130" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,25,130)">Bond Price</text>
+  <text x="460" y="240" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Interest Rate →</text>
+
+  <path d="M80,40 Q150,55 200,80 Q280,120 350,170 Q400,195 440,210" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+  <text x="105" y="38" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">30-year bond</text>
+
+  <path d="M80,130 Q200,140 300,160 Q380,175 440,190" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+  <text x="150" y="128" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">1-year bond</text>
+
+  <text x="300" y="248" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">Longer maturity = steeper slope = greater interest rate risk</text>
+</svg>
+<div class="chart-caption">Figure 4.1 — Longer-maturity bonds are more sensitive to interest rate changes</div>
+</div>
+</div>
+</article>
+</div>
+
+<!-- ═══════════ TAB V: RISK, RETURN & PORTFOLIO ═══════════ -->
+<div class="panel" id="panel-4">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject V</div>
+  <h2>Risk, Return &amp; Portfolio Theory</h2>
+  <div class="subtitle">The science of diversification, CAPM, and beta</div>
+  <p class="lede">Risk and return always go together. The central insight of modern portfolio theory is that investors can reduce risk — without proportionally sacrificing return — by holding diversified portfolios. But not all risk can be diversified away. The residual, systematic risk, measured by beta, is the only risk the market compensates. The Capital Asset Pricing Model formalises this relationship and underpins the estimation of the cost of equity — a critical input to WACC and company valuation.</p>
+</div>
+
+<div class="toc">
+  <div class="toc-title">In this section</div>
+  <div class="toc-item"><span class="toc-num">1.</span>Measuring Risk — Variance &amp; Standard Deviation</div>
+  <div class="toc-item"><span class="toc-num">2.</span>Portfolio Risk &amp; Diversification</div>
+  <div class="toc-item"><span class="toc-num">3.</span>Systematic vs. Non-Systematic Risk</div>
+  <div class="toc-item"><span class="toc-num">4.</span>Beta (β) — Definition, Regression &amp; Interpretation</div>
+  <div class="toc-item"><span class="toc-num">5.</span>The Capital Asset Pricing Model (CAPM)</div>
+  <div class="toc-item"><span class="toc-num">6.</span>The Security Market Line (SML) &amp; Alpha</div>
+  <div class="toc-item"><span class="toc-num">7.</span>CML vs. SML — What's the Difference?</div>
+  <div class="toc-item"><span class="toc-num">8.</span>Drivers of Beta — Operating &amp; Financial Leverage</div>
+  <div class="toc-item"><span class="toc-num">9.</span>Levered vs. Unlevered Beta</div>
+  <div class="toc-item"><span class="toc-num">10.</span>From CAPM to Cost of Equity to WACC</div>
+</div>
+
+<!-- ── 1. MEASURING RISK ── -->
+<div class="section">
+<h3>1. Measuring Risk</h3>
+<p>Risk is defined as the chance of the actual result being different from the expected result. In finance, risk is quantified by how far actual returns deviate from expected returns. The standard measures are variance and standard deviation — the higher they are, the greater the risk.</p>
+<div class="formula-box">
+  <div class="label">Variance &amp; Standard Deviation</div>
+  $$\sigma^2 = \frac{1}{N-1}\sum_{i=1}^{N}(R_i - \bar{R})^2 \qquad \sigma = \sqrt{\sigma^2}$$
+  <div class="sub-note">Deviations are squared to prevent positive and negative values from cancelling out.</div>
+</div>
+</div>
+
+<!-- ── 2. PORTFOLIO RISK ── -->
+<div class="section">
+<h3>2. Portfolio Risk &amp; Diversification</h3>
+<p>While portfolio <em>return</em> is simply the weighted average of individual asset returns, portfolio <em>risk</em> depends critically on how assets move together — measured by covariance and correlation. When correlation is below +1, combining assets reduces portfolio risk below the weighted average of individual risks. This is the power of diversification.</p>
+
+<div class="formula-box">
+  <div class="label">Two-Asset Portfolio Variance</div>
+  $$\sigma_p^2 = a^2\sigma_X^2 + b^2\sigma_Y^2 + 2ab\,\rho_{XY}\,\sigma_X\sigma_Y$$
+  <div class="sub-note">When ρ &lt; 1, the cross-term shrinks, pulling portfolio risk below the weighted average.</div>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Diversification in Action</div>
+  <table class="data-table">
+    <tr><th>Portfolio</th><th class="num">E(Return)</th><th class="num">Std Dev (σ)</th></tr>
+    <tr><td>100% Share X</td><td class="num">10.0%</td><td class="num">8.72%</td></tr>
+    <tr><td>50% X / 50% Y</td><td class="num">9.0%</td><td class="num"><strong>4.97%</strong></td></tr>
+    <tr><td>100% Share Y</td><td class="num">8.0%</td><td class="num">8.41%</td></tr>
+  </table>
+  <p>The 50/50 portfolio has a <em>lower risk than either individual share</em> while earning a return between the two. The return fell by only 1 percentage point but risk fell by nearly half.</p>
+</div>
+</div>
+
+<!-- ── 3. SYSTEMATIC VS NON-SYSTEMATIC ── -->
+<div class="section">
+<h3>3. Systematic vs. Non-Systematic Risk</h3>
+<p>As more securities are added to a portfolio, risk continues to decline — but only up to a point. The risk that <em>can</em> be eliminated by diversification is called <strong>non-systematic risk</strong> (also firm-specific, diversifiable, or unique risk). The risk that <em>cannot</em> be eliminated is called <strong>systematic risk</strong> (also market risk or non-diversifiable risk). Total risk = systematic + non-systematic.</p>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+  <text x="260" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">DIVERSIFICATION EFFECT</text>
+  <line x1="60" y1="30" x2="60" y2="230" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="60" y1="230" x2="480" y2="230" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="25" y="130" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,25,130)">Portfolio σ</text>
+  <text x="480" y="248" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Number of securities</text>
+
+  <line x1="60" y1="170" x2="470" y2="170" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="475" y="167" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">Systematic risk</text>
+
+  <path d="M80,50 Q120,80 160,110 Q200,135 260,148 Q320,158 380,163 Q440,167 470,168" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+  <path d="M80,50 Q120,80 160,110 Q200,135 260,148 Q320,158 380,163 Q440,167 470,168 L470,170 L80,170 Z" fill="var(--teal)" opacity="0.08"/>
+
+  <text x="200" y="90" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">Non-systematic</text>
+  <text x="200" y="104" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">(diversifiable) risk</text>
+  <text x="300" y="198" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">Systematic (market) risk — cannot be eliminated</text>
+
+  <text x="80" y="245" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">1</text>
+  <text x="160" y="245" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">10</text>
+  <text x="260" y="245" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">20</text>
+  <text x="380" y="245" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">40</text>
+  <text x="470" y="245" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">100</text>
+</svg>
+<div class="chart-caption">Figure 5.1 — As securities are added, non-systematic risk is diversified away. Systematic risk remains.</div>
+</div>
+
+<div class="insight">
+  <div class="ins-label">Critical Consequence</div>
+  <p>Since non-systematic risk can be diversified away <em>for free</em>, investors are <strong>not compensated</strong> for bearing it. The market only rewards systematic risk. This is why we need a measure of systematic risk — and that measure is <strong>beta (β)</strong>.</p>
+</div>
+</div>
+
+<!-- ── 4. BETA IN DEPTH ── -->
+<div class="section">
+<h3>4. Beta (β) — Definition, Regression &amp; Interpretation</h3>
+<p>Beta is the specific measure used for assessing the level of systematic risk. It measures the <strong>sensitivity of a security's returns to the fluctuations of the overall market</strong>. Formally, beta is derived by regressing the security's historical returns against the market's returns. The slope of the regression line <em>is</em> the beta.</p>
+
+<div class="formula-box">
+  <div class="label">Beta — Regression Definition</div>
+  $$r_i^o = \alpha_i + \beta_i \cdot r_m + \varepsilon_i$$
+  <div class="sub-note">The observed return on security i = alpha (intercept) + beta × market return + error term. The slope β captures the systematic component.</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">Beta — Covariance/Variance Formula</div>
+  $$\beta_i = \frac{\text{Cov}(r_i,\, r_m)}{\text{Var}(r_m)} = \frac{\sigma_{i,m}}{\sigma_m^2}$$
+  <div class="sub-note">Beta = systematic risk of security i ÷ total risk of the market portfolio.</div>
+</div>
+
+<!-- Beta regression scatter plot -->
+<div class="chart-wrap">
+<svg viewBox="0 0 520 340" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+  <text x="260" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">BETA REGRESSION — SECURITY vs. MARKET RETURNS</text>
+  <!-- Axes -->
+  <line x1="60" y1="30" x2="60" y2="280" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="30" y1="170" x2="490" y2="170" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="20" y="100" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,20,100)">Security return (rᵢ)</text>
+  <text x="490" y="188" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Market return (rₘ)</text>
+
+  <!-- Scatter dots -->
+  <circle cx="120" cy="210" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="150" cy="195" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="175" cy="225" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="200" cy="180" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="220" cy="170" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="250" cy="155" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="270" cy="140" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="290" cy="160" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="310" cy="120" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="330" cy="135" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="350" cy="105" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="370" cy="95" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="395" cy="80" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="420" cy="70" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="140" cy="240" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="100" cy="230" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="240" cy="185" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="380" cy="110" r="4" fill="var(--teal)" opacity="0.5"/>
+  <circle cx="440" cy="60" r="4" fill="var(--teal)" opacity="0.5"/><circle cx="160" cy="200" r="4" fill="var(--teal)" opacity="0.5"/>
+
+  <!-- Regression line -->
+  <line x1="80" y1="248" x2="460" y2="48" stroke="var(--accent)" stroke-width="2.5"/>
+
+  <!-- Alpha intercept -->
+  <line x1="60" y1="260" x2="60" y2="260" stroke="var(--accent)" stroke-width="0"/>
+  <circle cx="60" cy="268" r="4" fill="var(--accent)"/>
+  <text x="72" y="272" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">αᵢ (intercept)</text>
+
+  <!-- Slope annotation -->
+  <line x1="300" y1="140" x2="380" y2="140" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="380" y1="140" x2="380" y2="95" stroke="var(--muted)" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="340" y="155" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">Δrₘ</text>
+  <text x="395" y="120" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">Δrᵢ</text>
+  <text x="415" y="140" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="700">Slope = β</text>
+
+  <!-- Residual annotation -->
+  <line x1="250" y1="155" x2="250" y2="142" stroke="var(--terracotta)" stroke-width="1.5"/>
+  <circle cx="250" cy="155" r="4" fill="var(--teal)" opacity="0.7"/>
+  <text x="260" y="148" fill="var(--terracotta)" font-family="Source Sans 3, sans-serif" font-size="9">εᵢ (residual)</text>
+
+  <!-- Labels -->
+  <text x="260" y="310" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">Each dot = one period's observed return pair. The regression line's slope = β.</text>
+  <text x="260" y="325" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">Residuals (εᵢ) represent the firm-specific, diversifiable component.</text>
+</svg>
+<div class="chart-caption">Figure 5.2 — Beta is the slope of the regression of security returns against market returns</div>
+</div>
+
+<h4>What Beta Values Mean</h4>
+<table class="data-table">
+  <tr><th>β Value</th><th>Interpretation</th><th>Example</th></tr>
+  <tr><td><strong>β &gt;&gt; 1</strong> (e.g. 1.89)</td><td>Cyclical, volatile "racers." Amplifies market moves up <em>and</em> down. More volatile than the market.</td><td>Rio Tinto (mining)</td></tr>
+  <tr><td><strong>β ≈ 1</strong> (e.g. 1.02)</td><td>"Foot soldiers" marching in sync with the market. Moves like the index.</td><td>Royal Dutch Shell</td></tr>
+  <tr><td><strong>0 &lt; β &lt; 1</strong> (e.g. 0.66)</td><td>Defensive, less volatile stocks. Safe but lower expected return.</td><td>RWE (utilities)</td></tr>
+  <tr><td><strong>β = 0</strong></td><td>Theoretically, a return-less asset. Uncorrelated with the market.</td><td>Risk-free asset</td></tr>
+  <tr><td><strong>β &lt; 0</strong></td><td>"Dissident" stocks inversely correlated with the market — extremely rare.</td><td>Some gold miners</td></tr>
+</table>
+
+<div class="insight">
+  <div class="ins-label">Portfolio Beta</div>
+  <p>The beta of a portfolio is the <strong>weighted average</strong> of the betas of its individual securities: $\beta_p = \sum w_i \beta_i$. This means you can engineer any desired level of systematic risk by adjusting portfolio weights.</p>
+</div>
+</div>
+
+<!-- ── 5. CAPM ── -->
+<div class="section">
+<h3>5. The Capital Asset Pricing Model (CAPM)</h3>
+<p>Developed by Sharpe, Treynor, and Lintner in the 1960s, CAPM provides the framework for determining the expected return on any asset based solely on its systematic risk. The model rests on three assumptions: (1) investors can trade without taxes or transaction costs and borrow/lend at the risk-free rate; (2) all investors hold efficient portfolios; (3) all investors have homogeneous expectations about returns, variances, and covariances.</p>
+
+<div class="formula-box">
+  <div class="label">The CAPM Equation</div>
+  $$E(r_i) = \underbrace{r_f}_{\text{Risk-free rate}} + \underbrace{\beta_i}_{\text{Systematic risk}} \times \underbrace{\left(E(r_m) - r_f\right)}_{\text{Market risk premium}}$$
+  <div class="sub-note">Expected return = compensation for time (rƒ) + compensation for systematic risk (β × market risk premium).</div>
+</div>
+
+<p>The CAPM says that the risk premium on a particular asset is proportional to the market risk premium, scaled by the asset's beta. A stock with β = 1.5 should earn 1.5 times the market risk premium above the risk-free rate. A stock with β = 0.7 earns only 0.7 times the market risk premium.</p>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">CAPM — Expected Return Calculation</div>
+  <p>Risk-free rate = 3%. Market risk premium = 8%. What is the expected return for:</p>
+  <table class="data-table">
+    <tr><th>Company</th><th class="num">β</th><th class="num">Calculation</th><th class="num">E(rᵢ)</th></tr>
+    <tr><td>Company A</td><td class="num">1.50</td><td class="num">3% + 1.50 × 8%</td><td class="num"><strong>15.0%</strong></td></tr>
+    <tr><td>Firm Z</td><td class="num">0.70</td><td class="num">3% + 0.70 × 8%</td><td class="num"><strong>8.6%</strong></td></tr>
+    <tr><td>Market portfolio</td><td class="num">1.00</td><td class="num">3% + 1.00 × 8%</td><td class="num"><strong>11.0%</strong></td></tr>
+  </table>
+  <p>Higher beta → higher expected return. The market itself always sits at β = 1.</p>
+</div>
+</div>
+
+<!-- ── 6. SML & ALPHA ── -->
+<div class="section">
+<h3>6. The Security Market Line (SML) &amp; Alpha</h3>
+<p>The SML is the graphical representation of CAPM. It plots <strong>expected return on the vertical axis</strong> against <strong>beta on the horizontal axis</strong>. The line passes through two anchor points: the risk-free rate (β = 0) and the market portfolio (β = 1). Every fairly priced security should lie exactly on the SML.</p>
+
+<!-- SML DIAGRAM -->
+<div class="chart-wrap">
+<svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" style="max-width:540px">
+  <text x="280" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">THE SECURITY MARKET LINE (SML)</text>
+  <!-- Axes -->
+  <line x1="70" y1="30" x2="70" y2="300" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="70" y1="300" x2="530" y2="300" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="25" y="170" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,25,170)">Expected Return E(rᵢ)</text>
+  <text x="530" y="318" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Beta (β)</text>
+
+  <!-- Grid lines for beta ticks -->
+  <line x1="70" y1="300" x2="70" y2="295" stroke="var(--body)" stroke-width="1"/>
+  <text x="70" y="315" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">0</text>
+  <line x1="200" y1="300" x2="200" y2="295" stroke="var(--rule)" stroke-width="1"/>
+  <text x="200" y="315" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">0.5</text>
+  <line x1="330" y1="300" x2="330" y2="295" stroke="var(--rule)" stroke-width="1"/>
+  <text x="330" y="315" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">1.0</text>
+  <line x1="460" y1="300" x2="460" y2="295" stroke="var(--rule)" stroke-width="1"/>
+  <text x="460" y="315" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">1.5</text>
+
+  <!-- Return labels on Y axis -->
+  <line x1="65" y1="250" x2="70" y2="250" stroke="var(--rule)" stroke-width="1"/>
+  <text x="62" y="254" text-anchor="end" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">rƒ = 3%</text>
+  <line x1="65" y1="148" x2="70" y2="148" stroke="var(--rule)" stroke-width="1"/>
+  <text x="62" y="152" text-anchor="end" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">11%</text>
+  <line x1="65" y1="96" x2="70" y2="96" stroke="var(--rule)" stroke-width="1"/>
+  <text x="62" y="100" text-anchor="end" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">15%</text>
+
+  <!-- rƒ horizontal dashed -->
+  <line x1="70" y1="250" x2="520" y2="250" stroke="var(--rule)" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- SML line: from rƒ at β=0 to beyond β=1.5 -->
+  <line x1="70" y1="250" x2="520" y2="62" stroke="var(--accent)" stroke-width="2.5"/>
+
+  <!-- Market portfolio point at β=1 -->
+  <circle cx="330" cy="148" r="7" fill="var(--accent)"/>
+  <text x="345" y="142" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">Market Portfolio</text>
+  <text x="345" y="156" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10">(β=1, E(r)=11%)</text>
+
+  <!-- rƒ point at β=0 -->
+  <circle cx="70" cy="250" r="5" fill="var(--teal)"/>
+  <text x="85" y="264" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">rƒ = 3%</text>
+
+  <!-- Underpriced stock ABOVE SML (positive alpha) -->
+  <circle cx="395" cy="90" r="6" fill="var(--green)"/>
+  <text x="410" y="84" fill="var(--green)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">Stock A (underpriced)</text>
+  <line x1="395" y1="96" x2="395" y2="114" stroke="var(--green)" stroke-width="1.5"/>
+  <text x="415" y="112" fill="var(--green)" font-family="Source Sans 3, sans-serif" font-size="9">α &gt; 0 (buy)</text>
+
+  <!-- Overpriced stock BELOW SML (negative alpha) -->
+  <circle cx="260" cy="210" r="6" fill="var(--terracotta)"/>
+  <text x="275" y="218" fill="var(--terracotta)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">Stock B (overpriced)</text>
+  <line x1="260" y1="198" x2="260" y2="182" stroke="var(--terracotta)" stroke-width="1.5"/>
+  <text x="275" y="180" fill="var(--terracotta)" font-family="Source Sans 3, sans-serif" font-size="9">α &lt; 0 (sell)</text>
+
+  <!-- Market risk premium bracket -->
+  <line x1="335" y1="250" x2="335" y2="148" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="350" y="200" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="9" transform="rotate(-90,350,200)">Market risk premium = 8%</text>
+
+  <!-- SML label -->
+  <text x="490" y="72" fill="var(--accent)" font-family="Playfair Display, serif" font-size="14" font-weight="700" font-style="italic">SML</text>
+
+  <text x="280" y="340" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10" font-style="italic">Securities above the SML are underpriced (positive α); below are overpriced (negative α).</text>
+</svg>
+<div class="chart-caption">Figure 5.3 — The Security Market Line: expected return vs. beta. Fairly priced assets lie on the line.</div>
+</div>
+
+<p><strong>Alpha (α)</strong> is the difference between a security's actual expected return and the return predicted by CAPM. Securities with positive alpha sit <em>above</em> the SML — they are underpriced and offer excess return. Investors will buy them, pushing prices up and returns down until they fall back onto the SML. Securities with negative alpha sit <em>below</em> the SML — overpriced. Investors sell them, pushing prices down and returns up.</p>
+</div>
+
+<!-- ── 7. CML vs SML ── -->
+<div class="section">
+<h3>7. CML vs. SML — What's the Difference?</h3>
+<p>These two lines are often confused but serve different purposes:</p>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 600 230" xmlns="http://www.w3.org/2000/svg" style="max-width:580px">
+  <!-- CML box -->
+  <rect x="10" y="10" width="275" height="200" rx="4" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="147" y="38" text-anchor="middle" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="700" letter-spacing="2">CAPITAL MARKET LINE</text>
+  <text x="147" y="60" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">X-axis: <tspan font-weight="600">Total risk (σ)</tspan></text>
+  <text x="147" y="80" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">Y-axis: Expected return</text>
+  <text x="147" y="105" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">Applies to: <tspan font-weight="600">Efficient portfolios</tspan></text>
+  <text x="147" y="130" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">Shows: Total risk decomposition</text>
+  <text x="147" y="160" text-anchor="middle" fill="var(--muted)" font-family="Crimson Pro, serif" font-size="12" font-style="italic">Individual securities generally</text>
+  <text x="147" y="176" text-anchor="middle" fill="var(--muted)" font-family="Crimson Pro, serif" font-size="12" font-style="italic">do NOT lie on the CML (they</text>
+  <text x="147" y="192" text-anchor="middle" fill="var(--muted)" font-family="Crimson Pro, serif" font-size="12" font-style="italic">carry diversifiable risk too).</text>
+
+  <!-- SML box -->
+  <rect x="315" y="10" width="275" height="200" rx="4" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="452" y="38" text-anchor="middle" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="12" font-weight="700" letter-spacing="2">SECURITY MARKET LINE</text>
+  <text x="452" y="60" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">X-axis: <tspan font-weight="600">Systematic risk (β)</tspan></text>
+  <text x="452" y="80" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">Y-axis: Expected return</text>
+  <text x="452" y="105" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">Applies to: <tspan font-weight="600">All assets &amp; portfolios</tspan></text>
+  <text x="452" y="130" text-anchor="middle" fill="var(--body)" font-family="Crimson Pro, serif" font-size="13">Shows: Only systematic risk</text>
+  <text x="452" y="160" text-anchor="middle" fill="var(--muted)" font-family="Crimson Pro, serif" font-size="12" font-style="italic">All fairly priced securities</text>
+  <text x="452" y="176" text-anchor="middle" fill="var(--muted)" font-family="Crimson Pro, serif" font-size="12" font-style="italic">SHOULD lie on the SML.</text>
+  <text x="452" y="192" text-anchor="middle" fill="var(--muted)" font-family="Crimson Pro, serif" font-size="12" font-style="italic">Deviations = mispricing (α).</text>
+</svg>
+<div class="chart-caption">Figure 5.4 — CML vs. SML: the CML uses total risk (σ), the SML uses only systematic risk (β)</div>
+</div>
+</div>
+
+<!-- ── 8. DRIVERS OF BETA ── -->
+<div class="section">
+<h3>8. Drivers of Beta — Operating &amp; Financial Leverage</h3>
+<p>A company's beta reflects two sources of risk: <strong>business risk</strong> (from operations) and <strong>financial risk</strong> (from leverage). Both amplify sensitivity to the economic cycle.</p>
+
+<h4>Operating Leverage</h4>
+<p>Companies with a high ratio of fixed costs to total costs have high operating leverage. When revenues rise, profits rise faster (because fixed costs don't increase) — but when revenues fall, profits fall faster too. This makes earnings more volatile, pushing beta higher. Capital-intensive industries (cement, airlines, steel) tend to have high operating leverage and therefore higher betas. Service retailers with mostly variable costs have lower operating leverage and lower betas.</p>
+
+<h4>Financial Leverage</h4>
+<p>Firms with debt must make interest payments regardless of their sales. These fixed financing costs further amplify the volatility of returns to equity holders. The greater the debt-to-equity ratio, the higher the equity beta.</p>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" style="max-width:380px">
+  <text x="200" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">BETA RISES WITH LEVERAGE</text>
+  <line x1="60" y1="30" x2="60" y2="190" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="60" y1="190" x2="370" y2="190" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="20" y="110" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,20,110)">Equity Beta (βE)</text>
+  <text x="370" y="208" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Debt / Equity →</text>
+
+  <path d="M70,160 Q150,140 230,100 Q310,55 360,35" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+  <line x1="70" y1="160" x2="360" y2="160" stroke="var(--teal)" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="365" y="158" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="9" font-weight="600">βAsset</text>
+  <text x="365" y="33" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="9" font-weight="600">βEquity</text>
+</svg>
+<div class="chart-caption">Figure 5.5 — As the debt-to-equity ratio increases, equity beta rises above the asset (unlevered) beta</div>
+</div>
+</div>
+
+<!-- ── 9. LEVERED VS UNLEVERED BETA ── -->
+<div class="section">
+<h3>9. Levered vs. Unlevered Beta</h3>
+<p>A company's observed (equity) beta incorporates <em>both</em> business risk and financial risk from leverage. When comparing firms with different capital structures, or when a firm changes its own capital structure, we need to separate these two components. This is done by <strong>unlevering</strong> and <strong>relevering</strong> beta.</p>
+
+<div class="formula-box">
+  <div class="label">Unlevering Beta — Remove Financial Risk</div>
+  $$\beta_{\text{Asset}} = \frac{\beta_{\text{Equity}}}{1 + \dfrac{D}{E}\,(1-T)}$$
+  <div class="sub-note">The asset (unlevered) beta measures only the business risk of the firm's operations, ignoring leverage.</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">Relevering Beta — Apply New Capital Structure</div>
+  $$\beta_{\text{Equity}} = \beta_{\text{Asset}} \times \left[1 + \frac{D}{E}\,(1-T)\right]$$
+  <div class="sub-note">Same formula rearranged. Apply the asset beta to a new D/E ratio to get the new equity beta.</div>
+</div>
+
+<!-- Visual: Unlever → Relever flow -->
+<div class="chart-wrap">
+<svg viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg" style="max-width:600px">
+  <rect x="10" y="30" width="160" height="100" rx="4" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="90" y="60" text-anchor="middle" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">STEP 1</text>
+  <text x="90" y="80" text-anchor="middle" fill="var(--ink)" font-family="Playfair Display, serif" font-size="14" font-weight="700">Unlever β</text>
+  <text x="90" y="100" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">Remove peer's</text>
+  <text x="90" y="114" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">financial risk</text>
+
+  <!-- Arrow 1 -->
+  <line x1="175" y1="80" x2="230" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#arw)"/>
+
+  <rect x="235" y="30" width="160" height="100" rx="4" fill="var(--rose)" stroke="var(--rose-deep)"/>
+  <text x="315" y="55" text-anchor="middle" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">PURE BUSINESS RISK</text>
+  <text x="315" y="80" text-anchor="middle" fill="var(--ink)" font-family="Playfair Display, serif" font-size="18" font-weight="800">β<tspan font-size="13">Asset</tspan></text>
+  <text x="315" y="100" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">No leverage effect</text>
+  <text x="315" y="114" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">Industry-comparable</text>
+
+  <!-- Arrow 2 -->
+  <line x1="400" y1="80" x2="455" y2="80" stroke="var(--accent)" stroke-width="2" marker-end="url(#arw)"/>
+
+  <rect x="460" y="30" width="150" height="100" rx="4" fill="var(--cream)" stroke="var(--rule)"/>
+  <text x="535" y="60" text-anchor="middle" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">STEP 2</text>
+  <text x="535" y="80" text-anchor="middle" fill="var(--ink)" font-family="Playfair Display, serif" font-size="14" font-weight="700">Relever β</text>
+  <text x="535" y="100" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">Apply YOUR target</text>
+  <text x="535" y="114" text-anchor="middle" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">capital structure</text>
+</svg>
+<div class="chart-caption">Figure 5.6 — Two-step process: unlever a peer's beta to isolate business risk, then relever with your own D/E ratio</div>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Unlevering &amp; Relevering — Acura Technology enters Biotech</div>
+  <p><strong>Setup:</strong> Acura Technology wants to enter the biotech industry. Biogene, a biotech peer, has equity β = 0.90, with $95m equity and $5m debt. Acura intends a 60% equity-to-value ratio (i.e. 40% debt). No tax.</p>
+  <p><strong>Step 1 — Unlever Biogene's beta:</strong></p>
+  <p style="text-align:center;font-size:16px;">$\beta_{\text{Asset}} = \frac{0.90}{1 + \frac{5}{95}} = \frac{0.90}{1.053} = 0.855$</p>
+  <p><strong>Step 2 — Relever with Acura's target D/E:</strong> D/E = 40%/60% = 0.667</p>
+  <p style="text-align:center;font-size:16px;">$\beta_{\text{Equity}} = 0.855 \times \left(1 + 0.667\right) = 0.855 \times 1.667 = 1.425$</p>
+  <p><strong>Result:</strong> Acura should use β = 1.425 for the new biotech division. The higher beta reflects the additional financial risk from Acura's more leveraged capital structure, even though the underlying business risk (βAsset = 0.855) is the same as Biogene's.</p>
+</div>
+</div>
+
+<!-- ── 10. FROM CAPM TO WACC ── -->
+<div class="section">
+<h3>10. From CAPM to Cost of Equity to WACC</h3>
+<p>The entire chain of analysis connects as follows: CAPM determines the <strong>cost of equity</strong> ($r_E$), which feeds into the <strong>WACC</strong>, which serves as the <strong>discount rate</strong> for DCF valuation. This is why getting beta right — and understanding when to lever or unlever it — matters enormously for company valuation.</p>
+
+<!-- Flow diagram: CAPM → Cost of Equity → WACC → DCF -->
+<div class="chart-wrap">
+<svg viewBox="0 0 620 120" xmlns="http://www.w3.org/2000/svg" style="max-width:600px">
+  <defs><marker id="arwFlow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6Z" fill="var(--accent)"/></marker></defs>
+
+  <rect x="5" y="25" width="120" height="70" rx="4" fill="var(--teal)"/>
+  <text x="65" y="55" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">CAPM</text>
+  <text x="65" y="72" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="9">rƒ + β(rₘ − rƒ)</text>
+
+  <line x1="130" y1="60" x2="160" y2="60" stroke="var(--accent)" stroke-width="2" marker-end="url(#arwFlow)"/>
+
+  <rect x="165" y="25" width="120" height="70" rx="4" fill="var(--accent)"/>
+  <text x="225" y="50" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">Cost of Equity</text>
+  <text x="225" y="72" text-anchor="middle" fill="var(--rose)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">rE</text>
+
+  <line x1="290" y1="60" x2="320" y2="60" stroke="var(--accent)" stroke-width="2" marker-end="url(#arwFlow)"/>
+
+  <rect x="325" y="25" width="130" height="70" rx="4" fill="var(--terracotta)"/>
+  <text x="390" y="50" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">WACC</text>
+  <text x="390" y="72" text-anchor="middle" fill="var(--cream)" font-family="Source Sans 3, sans-serif" font-size="9">wE·rE + wD·rD(1−T)</text>
+
+  <line x1="460" y1="60" x2="490" y2="60" stroke="var(--accent)" stroke-width="2" marker-end="url(#arwFlow)"/>
+
+  <rect x="495" y="25" width="120" height="70" rx="4" fill="var(--green)"/>
+  <text x="555" y="50" text-anchor="middle" fill="white" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">DCF Valuation</text>
+  <text x="555" y="72" text-anchor="middle" fill="#C8EDE5" font-family="Source Sans 3, sans-serif" font-size="9">Discount FCFs</text>
+</svg>
+<div class="chart-caption">Figure 5.7 — The analytical chain: CAPM → Cost of Equity → WACC → DCF Valuation</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">WACC — Where it All Comes Together</div>
+  $$WACC = \frac{E}{D+E} \times \underbrace{r_E}_{\text{From CAPM}} + \frac{D}{D+E} \times r_D \times (1-T)$$
+  <div class="sub-note">WACC is the weighted average of the CAPM-derived cost of equity and the after-tax cost of debt.</div>
+</div>
+
+<div class="insight">
+  <div class="ins-label">Why This Matters</div>
+  <p>A small error in beta cascades through the entire valuation. If you overestimate β by 0.2, the cost of equity rises by ~1.2% (assuming 6% market risk premium), which can shift the enterprise value by 10–15% or more. This is why analysts spend significant time estimating beta carefully, selecting appropriate peers, and deciding whether to lever or unlever.</p>
+</div>
+</div>
+
+</article>
+</div>
+
+<!-- ═══════════ TAB VI: COMPANY VALUATION & WACC ═══════════ -->
+<div class="panel" id="panel-5">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject VI</div>
+  <h2>Company Valuation &amp; Cost of Capital</h2>
+  <div class="subtitle">What is a firm worth?</div>
+  <p class="lede">Valuation is not an exact science — there is no single correct value for a company, only a range of defensible estimates. The analyst's task is to combine DCF analysis with multiples-based methods, stress-test assumptions through sensitivity analysis, and arrive at a valuation range that can anchor negotiations and investment decisions.</p>
+</div>
+
+<div class="section">
+<h3>Weighted Average Cost of Capital</h3>
+<div class="formula-box">
+  <div class="label">WACC</div>
+  $$WACC = \frac{E}{D+E} \times r_E + \frac{D}{D+E} \times r_D \times (1-T)$$
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Worked Example</div>
+  <div class="ex-title">Calculating WACC</div>
+  <p>Market value of equity = €150m. Market value of debt = €100m. Cost of equity = 14.6%. Pre-tax cost of debt = 8.0%. Tax rate = 35%.</p>
+  <p style="text-align:center;font-size:16px;">$WACC = \frac{150}{250} \times 14.6\% + \frac{100}{250} \times 8\% \times (1-0.35) = 8.76\% + 2.08\% = 10.84\%$</p>
+</div>
+</div>
+
+<div class="section">
+<h3>DCF Valuation — The Tranquillity Example</h3>
+
+<h4>Step 1 — Forecast P&amp;L &amp; Free Cash Flows</h4>
+<div style="overflow-x:auto;">
+<table class="data-table" style="font-size:12px;">
+  <tr><th>€ millions</th><th class="num">2010E</th><th class="num">2011E</th><th class="num">2012F</th><th class="num">…</th><th class="num">2019F</th></tr>
+  <tr><td>Sales</td><td class="num">4,180</td><td class="num">4,288</td><td class="num">4,388</td><td class="num">…</td><td class="num">5,040</td></tr>
+  <tr><td>EBITDA</td><td class="num">1,288</td><td class="num">1,324</td><td class="num">1,410</td><td class="num">…</td><td class="num">1,662</td></tr>
+  <tr><td>EBIT</td><td class="num">1,097</td><td class="num">1,133</td><td class="num">1,218</td><td class="num">…</td><td class="num">1,440</td></tr>
+  <tr><td>NOPAT</td><td class="num">773</td><td class="num">802</td><td class="num">864</td><td class="num">…</td><td class="num">1,027</td></tr>
+  <tr><td><strong>Unlevered FCF</strong></td><td class="num"><strong>701</strong></td><td class="num"><strong>747</strong></td><td class="num"><strong>882</strong></td><td class="num">…</td><td class="num"><strong>1,056</strong></td></tr>
+</table>
+</div>
+
+<h4>Step 2 — Terminal Value</h4>
+<div class="formula-box">
+  <div class="label">Terminal Value (Gordon Growth)</div>
+  $$TV = \frac{FCF_{2019}}{WACC - g} = \frac{1{,}056}{6.50\% - 1.50\%} = €21{,}441\text{m}$$
+</div>
+
+<h4>Step 3 — Enterprise &amp; Equity Value</h4>
+<div class="ratio-grid">
+  <div class="ratio-card">
+    <div class="rc-label">PV of Forecast FCFs</div>
+    <div class="rc-formula" style="font-size:20px;font-weight:700;color:var(--teal)">€6,549m</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">PV of Terminal Value</div>
+    <div class="rc-formula" style="font-size:20px;font-weight:700;color:var(--teal)">€11,422m</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Enterprise Value</div>
+    <div class="rc-formula" style="font-size:20px;font-weight:700;color:var(--accent)">€17,971m</div>
+  </div>
+  <div class="ratio-card">
+    <div class="rc-label">Net Debt</div>
+    <div class="rc-formula" style="font-size:20px;font-weight:700;color:var(--body)">€220m</div>
+  </div>
+</div>
+
+<div class="principle">
+  <div class="num">Result</div>
+  <div class="statement">Equity Value = €17,971m − €220m = €17,751m</div>
+</div>
+</div>
+
+<div class="section">
+<h3>Sensitivity Analysis</h3>
+<div style="overflow-x:auto;">
+<table class="data-table" style="font-size:12px;">
+  <tr><th>Equity Value (€m)</th><th class="num">WACC 5.5%</th><th class="num">6.0%</th><th class="num" style="background:var(--rose);color:var(--accent);border-bottom-color:var(--rose-deep)">6.5%</th><th class="num">7.0%</th><th class="num">7.5%</th></tr>
+  <tr><td>g = 0.5%</td><td class="num">19,098</td><td class="num">17,273</td><td class="num">15,754</td><td class="num">14,470</td><td class="num">13,371</td></tr>
+  <tr><td>g = 1.0%</td><td class="num">20,548</td><td class="num">18,410</td><td class="num">16,662</td><td class="num">15,207</td><td class="num">13,976</td></tr>
+  <tr><td style="font-weight:700;background:var(--rose)">g = 1.5% (base)</td><td class="num">22,360</td><td class="num">19,799</td><td class="num" style="font-weight:700;background:var(--rose)">17,751</td><td class="num">16,077</td><td class="num">14,682</td></tr>
+  <tr><td>g = 2.0%</td><td class="num">24,689</td><td class="num">21,536</td><td class="num">19,083</td><td class="num">17,122</td><td class="num">15,517</td></tr>
+  <tr><td>g = 2.5%</td><td class="num">27,796</td><td class="num">23,768</td><td class="num">20,748</td><td class="num">18,398</td><td class="num">16,519</td></tr>
+</table>
+</div>
+<div class="chart-caption">Sensitivity table: Equity value (€m) across WACC and terminal growth rate combinations</div>
+</div>
+
+<div class="section">
+<h3>Multiples Valuation</h3>
+<div class="example-box">
+  <div class="ex-label">Industry Comparables — Tobacco Sector</div>
+  <div class="ex-title">Tranquillity Peer Group Multiples</div>
+  <table class="data-table" style="font-size:12px;">
+    <tr><th>Company</th><th class="num">EV/Sales</th><th class="num">EV/EBITDA</th><th class="num">EV/EBIT</th></tr>
+    <tr><td>Imperial Tobacco</td><td class="num">7.6×</td><td class="num">16.1×</td><td class="num">17.2×</td></tr>
+    <tr><td>British American Tobacco</td><td class="num">3.9×</td><td class="num">11.2×</td><td class="num">12.5×</td></tr>
+    <tr><td>Japan Tobacco</td><td class="num">0.7×</td><td class="num">7.3×</td><td class="num">11.7×</td></tr>
+    <tr><td>Reynolds American</td><td class="num">2.4×</td><td class="num">8.3×</td><td class="num">8.9×</td></tr>
+    <tr><td><strong>Average</strong></td><td class="num"><strong>3.9×</strong></td><td class="num"><strong>10.5×</strong></td><td class="num"><strong>12.1×</strong></td></tr>
+  </table>
+</div>
+</div>
+</article>
+</div>
+
+<!-- ═══════════ TAB VII: CAPITAL STRUCTURE & DERIVATIVES ═══════════ -->
+<div class="panel" id="panel-6">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Subject VII</div>
+  <h2>Capital Structure &amp; Derivatives</h2>
+  <div class="subtitle">Financing decisions and risk management</div>
+  <p class="lede">How a firm finances itself — the mix of debt and equity in its capital structure — is one of the most consequential decisions in corporate finance. Modigliani and Miller demonstrated that in a perfect world, capital structure is irrelevant. But taxes, bankruptcy costs, and information asymmetries make it anything but.</p>
+</div>
+
+<div class="section">
+<h3>Modigliani-Miller Propositions</h3>
+<div class="formula-box">
+  <div class="label">MM Proposition 1 (No Taxes)</div>
+  $$V_L = V_U$$
+  <div class="sub-note">The value of a levered firm equals the value of an unlevered firm. Capital structure is irrelevant.</div>
+</div>
+<div class="formula-box">
+  <div class="label">MM Proposition 2 (No Taxes)</div>
+  $$r_E = r_A + \frac{D}{E}(r_A - r_D)$$
+  <div class="sub-note">Cost of equity rises linearly with leverage. WACC remains constant.</div>
+</div>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" style="max-width:480px">
+  <text x="250" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">MM PROPOSITION 2 — NO TAXES</text>
+  <line x1="70" y1="30" x2="70" y2="220" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="70" y1="220" x2="460" y2="220" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="28" y="130" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,28,130)">Cost of capital</text>
+  <text x="460" y="238" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">D/E →</text>
+
+  <line x1="90" y1="140" x2="440" y2="60" stroke="var(--accent)" stroke-width="2.5"/>
+  <text x="445" y="58" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">rE (cost of equity)</text>
+
+  <line x1="90" y1="140" x2="440" y2="140" stroke="var(--teal)" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <text x="445" y="138" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">WACC = rA</text>
+
+  <path d="M90,180 L300,180 Q380,185 440,200" fill="none" stroke="var(--muted)" stroke-width="2"/>
+  <text x="445" y="198" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="11">rD (cost of debt)</text>
+</svg>
+<div class="chart-caption">Figure 7.1 — As leverage increases, cost of equity rises but WACC remains constant (no taxes)</div>
+</div>
+</div>
+
+<div class="section">
+<h3>Effect of Taxes</h3>
+<div class="formula-box">
+  <div class="label">MM with Taxes</div>
+  $$V_L = V_U + \tau \times D$$
+  <div class="sub-note">The value of the levered firm equals the unlevered value plus the PV of the tax shield.</div>
+</div>
+<div class="insight">
+  <div class="ins-label">Interest Tax Shield</div>
+  <p>Interest tax shield = Interest payments × Corporate tax rate. Since interest is tax-deductible, debt creates a "shield" that reduces the firm's tax bill, increasing total cash flows to investors.</p>
+</div>
+</div>
+
+<div class="section">
+<h3>Trade-Off vs. Pecking-Order Theory</h3>
+<div class="chart-wrap">
+<svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+  <text x="260" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700" letter-spacing="2">TRADE-OFF THEORY</text>
+  <line x1="60" y1="30" x2="60" y2="240" stroke="var(--body)" stroke-width="1.5"/>
+  <line x1="60" y1="240" x2="480" y2="240" stroke="var(--body)" stroke-width="1.5"/>
+  <text x="25" y="135" text-anchor="middle" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10" transform="rotate(-90,25,135)">Value of firm</text>
+  <text x="480" y="258" text-anchor="end" fill="var(--body)" font-family="Source Sans 3, sans-serif" font-size="10">Debt →</text>
+
+  <line x1="60" y1="180" x2="470" y2="180" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4,4"/>
+  <text x="475" y="178" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="10">VU</text>
+
+  <line x1="60" y1="180" x2="470" y2="90" stroke="var(--teal)" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="400" y="80" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="10">VL = VU + τD</text>
+
+  <path d="M60,180 Q150,140 240,110 Q300,100 330,98 Q360,100 400,115 Q440,140 470,170" fill="none" stroke="var(--accent)" stroke-width="2.5"/>
+  <text x="360" y="65" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="600">Actual firm value</text>
+
+  <circle cx="330" cy="98" r="5" fill="var(--accent)"/>
+  <line x1="330" y1="103" x2="330" y2="240" stroke="var(--accent)" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="330" y="258" text-anchor="middle" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="700">Optimal D*</text>
+
+  <text x="180" y="155" fill="var(--green)" font-family="Source Sans 3, sans-serif" font-size="10">↑ Tax shield benefit</text>
+  <text x="420" y="155" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10">↑ Distress costs</text>
+</svg>
+<div class="chart-caption">Figure 7.2 — Trade-off theory: optimal capital structure balances tax shield benefits against financial distress costs</div>
+</div>
+</div>
+
+<div class="section">
+<h3>Options — Payoff Diagrams</h3>
+<div class="formula-box">
+  <div class="label">Option Payoffs</div>
+  $$C = \max(S - X,\, 0) \qquad P = \max(X - S,\, 0)$$
+</div>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg" style="max-width:500px">
+  <text x="140" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">LONG CALL</text>
+  <text x="390" y="18" text-anchor="middle" fill="var(--ink)" font-family="Source Sans 3, sans-serif" font-size="11" font-weight="700">LONG PUT</text>
+
+  <line x1="30" y1="30" x2="30" y2="210" stroke="var(--body)" stroke-width="1"/>
+  <line x1="30" y1="160" x2="250" y2="160" stroke="var(--body)" stroke-width="1"/>
+  <text x="25" y="100" text-anchor="end" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9" transform="rotate(-90,20,100)">Payoff</text>
+  <text x="240" y="175" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">Share price</text>
+  <line x1="40" y1="160" x2="140" y2="160" stroke="var(--accent)" stroke-width="2.5"/>
+  <line x1="140" y1="160" x2="240" y2="60" stroke="var(--accent)" stroke-width="2.5"/>
+  <circle cx="140" cy="160" r="3" fill="var(--accent)"/>
+  <text x="140" y="180" text-anchor="middle" fill="var(--accent)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">X</text>
+
+  <line x1="280" y1="30" x2="280" y2="210" stroke="var(--body)" stroke-width="1"/>
+  <line x1="280" y1="160" x2="500" y2="160" stroke="var(--body)" stroke-width="1"/>
+  <text x="275" y="100" text-anchor="end" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9" transform="rotate(-90,270,100)">Payoff</text>
+  <text x="490" y="175" fill="var(--muted)" font-family="Source Sans 3, sans-serif" font-size="9">Share price</text>
+  <line x1="290" y1="60" x2="390" y2="160" stroke="var(--teal)" stroke-width="2.5"/>
+  <line x1="390" y1="160" x2="490" y2="160" stroke="var(--teal)" stroke-width="2.5"/>
+  <circle cx="390" cy="160" r="3" fill="var(--teal)"/>
+  <text x="390" y="180" text-anchor="middle" fill="var(--teal)" font-family="Source Sans 3, sans-serif" font-size="10" font-weight="600">X</text>
+</svg>
+<div class="chart-caption">Figure 7.3 — Payoff diagrams for long call (left) and long put (right) at expiration</div>
+</div>
+
+<div class="formula-box">
+  <div class="label">Put-Call Parity</div>
+  $$S + P = \frac{X}{(1+r_f)^t} + C$$
+  <div class="sub-note">Holding a share + put must cost the same as holding a bond + call (same strike, same expiration).</div>
+</div>
+</div>
+</article>
+</div>
+
+<!-- ═══════════ TAB VIII: TEST YOUR KNOWLEDGE ═══════════ -->
+<div class="panel" id="panel-7">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Examination Practice</div>
+  <h2>Test Your Knowledge</h2>
+  <div class="subtitle">50 questions across all seven subjects</div>
+  <p class="lede">The following 50 questions are modelled on the ESCP Europe Financial Strategy examination format. They span the entire course — from ratio analysis to derivatives. Section A contains short-answer conceptual and computational questions. Section B contains longer, multi-part problems requiring integrated analysis. Work through them with pen, paper, and a calculator. No typing required — just thinking.</p>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Examination Structure</div>
+  <div class="toc-item"><span class="toc-num">A.</span>Section A — 35 questions (conceptual &amp; short computation)</div>
+  <div class="toc-item"><span class="toc-num">B.</span>Section B — 15 questions (multi-part integrated problems)</div>
+</div>
+
+<!-- ═══════ SECTION A ═══════ -->
+<div class="principle">
+  <div class="num">Section A</div>
+  <div class="statement">Conceptual &amp; Short Computation — 35 Questions</div>
+</div>
+
+<!-- ── SUBJECT I: FINANCIAL STATEMENT ANALYSIS ── -->
+<div class="section">
+<h3>Financial Statement Analysis</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 1</div>
+  <div class="ex-title">DuPont Decomposition</div>
+  <p>A fast-food chain has an asset turnover of 2.5× and a profit margin of 4%. A luxury hotel has an asset turnover of 0.4× and a profit margin of 25%. Both firms have an equity multiplier of 2.0×. Calculate the ROE for each firm using the DuPont three-part decomposition. What does the comparison reveal about different business models achieving similar returns?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 2</div>
+  <div class="ex-title">Ratio Interpretation</div>
+  <p>Company A has a current ratio of 3.2× and a quick ratio of 0.6×. Company B has a current ratio of 1.4× and a quick ratio of 1.3×. Which company is in a stronger liquidity position and why? What does the gap between current and quick ratios tell you about Company A?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 3</div>
+  <div class="ex-title">Cross-Sectional Analysis</div>
+  <p>Three pharmaceutical firms report the following: Firm X has a debt-equity ratio of 0.2× and ROE of 18%; Firm Y has D/E of 1.5× and ROE of 22%; Firm Z has D/E of 0.8× and ROE of 20%. Using the DuPont framework, explain why Firm Y's higher ROE does not necessarily make it a superior business.</p>
+</div>
+</div>
+
+<!-- ── SUBJECT II: FOUNDATIONS ── -->
+<div class="section">
+<h3>Foundations of Corporate Finance</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 4</div>
+  <div class="ex-title">Agency Costs</div>
+  <p>Explain the principal-agent problem in the context of a publicly listed company. Identify three specific mechanisms that shareholders can use to align managers' incentives with their own. Why is value maximisation different from profit maximisation?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 5</div>
+  <div class="ex-title">The Three Pillars</div>
+  <p>A technology start-up is deciding whether to build a new data centre (£50m), whether to fund it via a bank loan or a share issuance, and how to manage the timing mismatch between its quarterly server payments and annual client billing cycles. Identify which of the three concerns of corporate finance each decision corresponds to.</p>
+</div>
+</div>
+
+<!-- ── SUBJECT III: TIME VALUE OF MONEY ── -->
+<div class="section">
+<h3>Time Value of Money &amp; Investment Decisions</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 6</div>
+  <div class="ex-title">Present Value</div>
+  <p>You deposit €10,000 today in an account paying 6% compound interest. How much will you have in 5 years? Now suppose instead you will receive €15,000 in 5 years. What is its present value at 6%? Which option is worth more today?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 7</div>
+  <div class="ex-title">NPV Decision</div>
+  <p>A pharmaceutical company is evaluating two strategies for a new drug. Strategy 1: invest $1 billion now and receive $500m, $400m, and $300m in years 1–3. Strategy 2: invest $200m now and $200m in year 1, then receive $300m in each of years 2 and 3. At a discount rate of 5%, which strategy creates more value?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 8</div>
+  <div class="ex-title">Perpetuity &amp; Growing Perpetuity</div>
+  <p>You want to endow a scholarship that pays £2,000 per year forever. The interest rate is 10%. How much must you donate? If instead the scholarship must grow at 3% per year to keep pace with inflation (with the first payment of £2,000 in one year), how much must you donate?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 9</div>
+  <div class="ex-title">IRR Pitfall</div>
+  <p>A CEO receives $1 million upfront to write a book, but must forgo $500,000 per year in income for 3 years. The IRR is 23.38% and the cost of capital is 10%. The CEO concludes this is a good deal. Calculate the NPV and explain why the CEO's IRR-based conclusion is wrong. What is unusual about the cash flow pattern?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 10</div>
+  <div class="ex-title">Payback vs. NPV</div>
+  <p>Three projects all have a 2-year payback period. Project A: (−£2,000), £1,000, £1,000, £10,000. Project B: (−£2,000), £1,000, £1,000, £0. Project C: (−£2,000), £0, £2,000, £0. At a 10% discount rate, calculate the NPV of each. Why does the payback rule fail to distinguish between them?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 11</div>
+  <div class="ex-title">Capital Rationing</div>
+  <p>You have a £20 budget. Five projects are available: Q (cost £3, NPV £1), R (cost £5, NPV £1), S (cost £7, NPV £3), T (cost £6, NPV £2), U (cost £4, NPV £1). Calculate the profitability index for each. Which combination of projects maximises total NPV within the budget?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 12</div>
+  <div class="ex-title">EVA</div>
+  <p>A manager generates $13m per year from a $100m investment. The return on investment is 13%. Calculate the Economic Value Added (EVA) if the cost of capital is (a) 10%, (b) 13%, and (c) 20%. In which cases has the manager created value?</p>
+</div>
+</div>
+
+<!-- ── SUBJECT IV: SECURITIES ── -->
+<div class="section">
+<h3>Valuation of Securities</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 13</div>
+  <div class="ex-title">Gordon Growth Model</div>
+  <p>A company pays an annual dividend of $0.65 one year from now. Analysts expect dividends to grow at 12% per year for the next 5 years, after which growth levels off at 2% per year. The cost of equity is 8%. What is the value of the share today?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 14</div>
+  <div class="ex-title">Dividend Cut &amp; Growth</div>
+  <p>Jetway Enterprises announces it will cut its dividend from €4.00 to €2.50 per share and reinvest the savings. Prior to the announcement, dividends were expected to grow at 3% per year, and the share traded at €50.00. After the cut, dividends are expected to grow at 5% indefinitely. Assuming the risk does not change, what is the new share price? Is the dividend cut value-creating?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 15</div>
+  <div class="ex-title">Determinants of g</div>
+  <p>A firm has a plowback ratio of 60% and an ROE of 15%. What is its sustainable growth rate? If the firm increases its payout ratio to 70% (reducing the plowback to 30%), what happens to g? Explain the trade-off the firm faces between current dividends and future growth.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 16</div>
+  <div class="ex-title">Bond Pricing</div>
+  <p>A bond has a face value of €100, pays an annual coupon of 5.8%, matures in 3 years, and the YTM is 4%. Calculate the bond price. Now recalculate if YTM rises to 10%. Explain why the bond moves from a premium to a discount.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 17</div>
+  <div class="ex-title">Yield Curve Interpretation</div>
+  <p>The UK government bond yield curve is inverted — short-term yields are above long-term yields. What does this typically signal about the market's expectations for the economy? How would this affect a company's decision to issue long-term versus short-term debt?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 18</div>
+  <div class="ex-title">Interest Rate Risk</div>
+  <p>Bond X is a zero-coupon bond with 4-year maturity. Bond Y pays a 10% coupon annually with the same maturity. Both have a face value of €100 and a current YTM of 10%. If interest rates rise by 2 percentage points, which bond's price will fall by a larger percentage? Explain why using the two determinants of interest rate sensitivity.</p>
+</div>
+</div>
+
+<!-- ── SUBJECT V: RISK & PORTFOLIO ── -->
+<div class="section">
+<h3>Risk, Return &amp; Portfolio Theory</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 19</div>
+  <div class="ex-title">Portfolio Risk &amp; Return</div>
+  <p>The expected return on luxury goods company JPG is 15% with σ = 20%. The expected return on energy company RDS is 11% with σ = 8%. The correlation coefficient is 0.45. You invest €15,000 in JPG and €35,000 in RDS. (a) What is the expected return of your portfolio? (b) What is the standard deviation? (c) What would the standard deviation be if ρ = −0.45? What general conclusion can you draw?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 20</div>
+  <div class="ex-title">Beta Interpretation</div>
+  <p>Royal Dutch Shell has β = 1.02, Rio Tinto has β = 1.89, and RWE has β = 0.66. If the market falls by 10%, approximately what return would you expect from each stock? Which stock would a risk-averse investor prefer in a downturn and why?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 21</div>
+  <div class="ex-title">CAPM Calculation</div>
+  <p>Company A has β = 1.5 and Firm Z has β = 0.7. The risk-free rate is 3% and the market risk premium is 8%. (a) Calculate the expected return for each using CAPM. (b) If you create a portfolio with 60% in A and 40% in Z, what is the portfolio beta and expected return?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 22</div>
+  <div class="ex-title">Alpha &amp; the SML</div>
+  <p>A stock has β = 1.2. The risk-free rate is 4% and the expected market return is 12%. CAPM predicts an expected return of what? If the stock is actually expected to return 15%, what is its alpha? Is the stock overpriced or underpriced relative to the SML?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 23</div>
+  <div class="ex-title">CML vs. SML</div>
+  <p>True or false? "Modern portfolio theory and the CML help you determine a fair level of risk for a given asset's expected return." Explain briefly. Then answer: True or false? "The CAPM gives the most accurate way to assess the expected return of a security as a function of its diversifiable risk."</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 24</div>
+  <div class="ex-title">Systematic vs. Non-Systematic</div>
+  <p>A portfolio of 50 randomly selected shares has a standard deviation of 18%. Adding 50 more shares reduces it to 17.5%. Explain why the reduction is so small. What type of risk has already been largely eliminated? What type remains?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 25</div>
+  <div class="ex-title">Unlevering &amp; Relevering Beta</div>
+  <p>Cronmental has an equity beta of 1.20, with €50m equity and €50m debt. Your firm intends to enter the same industry with a 70% equity-to-value ratio. The tax rate is 30%. (a) Calculate Cronmental's unlevered (asset) beta. (b) Relever it to your firm's target capital structure. (c) Explain in plain English what the difference between the two betas represents.</p>
+</div>
+</div>
+
+<!-- ── SUBJECT VI: COMPANY VALUATION ── -->
+<div class="section">
+<h3>Company Valuation &amp; Cost of Capital</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 26</div>
+  <div class="ex-title">WACC Calculation</div>
+  <p>A firm has market equity of €150m and market debt of €100m. The cost of equity is 14.6%, the pre-tax cost of debt is 8%, and the tax rate is 35%. Calculate the WACC. Should the firm use book value or market value weights? Explain why.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 27</div>
+  <div class="ex-title">Terminal Value Sensitivity</div>
+  <p>A firm's last projected FCF is €1,056m. WACC is 6.5% and terminal growth rate is 1.5%. (a) Calculate the terminal value. (b) Recalculate with g = 2.5%. (c) What percentage increase in TV results from a 1% increase in g? Why is terminal value so sensitive to this assumption?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 28</div>
+  <div class="ex-title">DCF vs. Multiples</div>
+  <p>Explain the fundamental difference between DCF valuation (internal) and multiples valuation (external). A tobacco company's DCF suggests an enterprise value of €17.9bn, but EV/EBITDA trading comparables suggest a range of €10.6bn to €15.6bn. What could explain the gap? Which method should carry more weight and why?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 29</div>
+  <div class="ex-title">Enterprise Value Bridge</div>
+  <p>A company has an enterprise value of €25bn and net debt of €3bn. There are 500 million shares outstanding. (a) What is the equity value? (b) What is the implied share price? (c) If the current share price is €40, does the DCF suggest the stock is overvalued or undervalued?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 30</div>
+  <div class="ex-title">Cost of Equity — DDM vs. CAPM</div>
+  <p>A company's last dividend was $2, expected growth rate is 4%, and the share trades at $20. Using the dividend growth model, what is the cost of equity? The company also has β = 1.1, rƒ = 4%, and market risk premium = 9%. Using CAPM, what is the cost of equity? Which estimate would you use and why?</p>
+</div>
+</div>
+
+<!-- ── SUBJECT VII: CAPITAL STRUCTURE & DERIVATIVES ── -->
+<div class="section">
+<h3>Capital Structure &amp; Derivatives</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 31</div>
+  <div class="ex-title">MM Propositions</div>
+  <p>Explain the Modigliani and Miller propositions under perfect market conditions (no taxes). What happens to the value of the firm, the cost of equity, and the WACC as the firm increases leverage? Why is this result called the "irrelevance proposition"?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 32</div>
+  <div class="ex-title">Tax Shield Valuation</div>
+  <p>Investors expect a return on equity of 12.5% from a firm generating £10m EBIT in perpetuity. There are 10 million shares, no debt. The firm borrows at 7.5% to repurchase 25% of shares. Tax rate is 40%. What is the PV of the interest tax shields? What is the new firm value?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 33</div>
+  <div class="ex-title">Trade-Off Theory</div>
+  <p>Draw and explain the trade-off theory graph showing how firm value changes with leverage. At what point is the capital structure optimal? Why don't all firms simply maximise debt to capture the full tax shield benefit?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 34</div>
+  <div class="ex-title">Pecking Order</div>
+  <p>The pecking-order theory predicts that the most profitable firms borrow the least. Explain this prediction. Why would a highly profitable tech firm with mostly intangible assets prefer equity to debt?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 35</div>
+  <div class="ex-title">Option Payoffs</div>
+  <p>You buy a call option with a strike price of £20 for a premium of £3. (a) What is your payoff if the share price at expiration is £30? £15? (b) What is your profit in each case? (c) At what share price do you break even? Now draw the payoff diagram for a long put with the same strike price.</p>
+</div>
+</div>
+
+<!-- ═══════ SECTION B ═══════ -->
+<div class="principle">
+  <div class="num">Section B</div>
+  <div class="statement">Multi-Part Integrated Problems — 15 Questions</div>
+</div>
+
+<div class="section">
+<h3>Integrated Problems</h3>
+
+<div class="example-box">
+  <div class="ex-label">Question 36</div>
+  <div class="ex-title">Hampstead Electronics — Full WACC Analysis</div>
+  <p>Hampstead Electronics has 100 million common shares. EBIT per share is £3 and the tax rate is 30%. The firm is not growing and expects EBIT of £3/share forever. It has two debt issues:</p>
+  <table class="data-table" style="font-size:13px;">
+    <tr><th>Coupon</th><th class="num">Book Value</th><th class="num">Market Value</th><th class="num">YTM</th></tr>
+    <tr><td>5.50%</td><td class="num">£600m</td><td class="num">£591m</td><td class="num">5.60%</td></tr>
+    <tr><td>8.75%</td><td class="num">£400m</td><td class="num">£423m</td><td class="num">8.20%</td></tr>
+  </table>
+  <p>(a) If the unlevered cost of equity would be 15%, calculate the cost of levered equity. (b) What is the firm's beta assuming UK gilts yield 4% and the market risk premium is 9%? (c) Calculate the WACC. State all assumptions.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 37</div>
+  <div class="ex-title">Target Capital Structure &amp; Project Selection</div>
+  <p>A company uses only debt and equity with a target of 45% debt / 55% equity. It borrows at 10%, tax rate is 40%. Its last dividend was $2, constant growth rate is 4%, and the share price is $20. Two projects are available: Project A returns 13%, Project B returns 10%. Both are equally risky as existing assets. (a) Cost of equity? (b) WACC? (c) Which project(s) should the company accept?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 38</div>
+  <div class="ex-title">Free Cash Flow &amp; DCF Build</div>
+  <p>A company has the following 3-year project: annual sales of £50,000, COGS of £30,000, SG&amp;A of £5,000, initial investment of £21,000 (straight-line depreciation over 3 years), working capital of 20% of annual sales, and a tax rate of 34%. Required return is 20%. (a) Calculate the annual cash flow from operations. (b) Determine the change in working capital in years 0 and 3. (c) Calculate the free cash flow for each year. (d) What is the NPV? Should the project be accepted?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 39</div>
+  <div class="ex-title">Non-Constant Growth Share Valuation</div>
+  <p>MyClub gym chain is expected to pay the following dividends: Year 1: £1.02, Year 2: £1.13, Year 3: £1.25, Year 4: £1.39, Year 5: £1.54. Beyond year 5, dividends grow at 3.36% per year forever. The discount rate is 5.60%. (a) Calculate the share price at the end of year 5. (b) Discount all cash flows to find the share price today. (c) What percentage of today's share price is attributable to the terminal value?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 40</div>
+  <div class="ex-title">Portfolio Construction &amp; Diversification</div>
+  <p>Share X has E(r) = 10%, σ = 17.2%. Share Y has E(r) = 15%, σ = 27.3%. Correlation = 0.30. (a) Calculate the expected return and standard deviation of a portfolio with 60% in X and 40% in Y. (b) Repeat with ρ = 1.0. (c) Repeat with ρ = −0.30. (d) Graph the three risk-return combinations conceptually. What does this illustrate about the role of correlation in diversification?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 41</div>
+  <div class="ex-title">Levered Beta, CAPM &amp; WACC Chain</div>
+  <p>You are valuing a private biotech firm. The closest listed peer, Biogene, has equity β = 0.90, market equity of $95m and debt of $5m. Your target firm will have a D/E ratio of 0.5 and a tax rate of 25%. The risk-free rate is 3% and the market risk premium is 7%. (a) Unlever Biogene's beta. (b) Relever to your target's D/E. (c) Use CAPM to determine the cost of equity. (d) If the cost of debt is 5%, calculate WACC.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 42</div>
+  <div class="ex-title">Sensitivity Analysis — Full Matrix</div>
+  <p>A company's DCF model produces a base-case equity value of €17,751m at WACC = 6.5% and g = 1.5%, using a terminal FCF of €1,056m. (a) Recalculate the terminal value, enterprise value, and equity value (net debt = €220m) for all combinations of WACC ∈ {6.0%, 6.5%, 7.0%} and g ∈ {1.0%, 1.5%, 2.0%}. (b) Which parameter — WACC or g — has a larger impact on equity value? (c) What is the range of implied EV/EBITDA exit multiples if EBITDA in the terminal year is €1,662m?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 43</div>
+  <div class="ex-title">Capital Structure — Leverage &amp; EPS</div>
+  <p>A firm has £8m in assets, 400,000 shares at £20 each, no debt, and an interest rate of 10%. It considers replacing half its equity with £4m of debt. EBIT can be £500,000 (recession), £1,000,000 (normal), or £1,500,000 (boom). No tax. (a) Calculate ROE and EPS for each scenario under both capital structures. (b) At what EBIT level does debt become advantageous? (c) Calculate the WACC under both structures and show they are equal. (d) Explain what this demonstrates about MM Proposition 1.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 44</div>
+  <div class="ex-title">MM with Taxes — Gondwana Revisited</div>
+  <p>Gondwana has total assets of $1m, perpetual EBIT of $140,000, cost of debt of 5%, and a tax rate of 40%. Payout ratio is 100% and depreciation = capex. (a) Calculate total cash flows to investors at 0%, 10%, 20%, and 30% debt. (b) Calculate the value of the firm at each level using the MM with-taxes formula. (c) Why does the total cash flow to investors increase with debt even though net income to shareholders falls?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 45</div>
+  <div class="ex-title">Put-Call Parity</div>
+  <p>A share trades at $110. A 1-year call option with X = $105 costs $17. A 1-year put option with X = $105 costs $5. The risk-free rate is 5%. (a) Verify whether put-call parity holds. (b) If it does not, describe the arbitrage strategy. (c) What is the maximum profit from the arbitrage?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 46</div>
+  <div class="ex-title">Option Strategies — Straddle</div>
+  <p>You buy a call and a put, both with a strike price of £20. The call costs £3 and the put costs £2. (a) What is your total investment? (b) What is your payoff and profit if the share price at expiration is £30? £20? £10? (c) At what two share prices do you break even? (d) When would an investor use this strategy?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 47</div>
+  <div class="ex-title">Comparable Valuation</div>
+  <p>You are valuing a tobacco firm with Sales of €4,180m, EBITDA of €1,288m, and EBIT of €1,097m. Peer multiples: EV/Sales range 2.4×–5.0×, EV/EBITDA range 8.2×–12.0×, EV/EBIT range 9.0×–13.0×. (a) Calculate the implied enterprise value range under each multiple. (b) A prior transaction comp suggests EV/EBITDA of 10.0×–13.0×. How does this compare? (c) Why might transaction multiples exceed trading multiples?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 48</div>
+  <div class="ex-title">Financial Distress &amp; Agency Costs of Debt</div>
+  <p>A firm has assets worth £1,800 and debt of £2,000 due in one year. It considers a 50/50 gamble: success (assets rise to £2,500) or failure (assets fall to £300). No upfront investment required. (a) What is the expected value of the firm after the gamble? (b) Why might equity holders still want to take this gamble? (c) What is this behaviour called? (d) How can debt covenants mitigate this problem?</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 49</div>
+  <div class="ex-title">Efficient Market Hypothesis</div>
+  <p>Explain the three forms of the efficient market hypothesis (weak, semi-strong, strong). Under the semi-strong form, would you expect to earn excess returns by: (a) studying past share price patterns? (b) analysing published financial statements? (c) trading on insider information? Justify each answer.</p>
+</div>
+
+<div class="example-box">
+  <div class="ex-label">Question 50</div>
+  <div class="ex-title">Integrated Valuation — Bringing It All Together</div>
+  <p>You are analysing a consumer goods firm. The risk-free rate is 3%, market risk premium is 6%, and the firm's equity β is 1.10. The firm has €2bn of debt at 5% pre-tax and €5bn of equity (market value). Tax rate is 30%. The firm generates FCF of €400m, expected to grow at 2% forever. (a) Calculate the cost of equity via CAPM. (b) Calculate WACC. (c) Estimate the enterprise value using the growing perpetuity model. (d) What is the equity value? (e) If there are 250 million shares outstanding, what is the implied share price? (f) If the market price is €22, what is your recommendation?</p>
+</div>
+
+</div>
+</article>
+</div>
+
+<!-- ════════════════ FOOTER ════════════════ -->
+<footer class="site-footer">
+  Corporate Finance 201 · London Track · Professor Terence Tse · 2024
+</footer>
+
+<!-- ════════════════ JAVASCRIPT ════════════════ -->
+<script>
+const tabData = [
+  { num: "I", label: "Financial Analysis" },
+  { num: "II", label: "Foundations" },
+  { num: "III", label: "TVM & Investment" },
+  { num: "IV", label: "Securities" },
+  { num: "V", label: "Risk & Portfolio" },
+  { num: "VI", label: "Valuation & WACC" },
+  { num: "VII", label: "Cap Structure" },
+  { num: "✎", label: "Test Yourself" },
+];
+
+const tabsBar = document.getElementById("tabsBar");
+const tabsWrap = document.getElementById("tabsWrap");
+let activeTab = 0;
+
+function buildTabs() {
+  tabsBar.innerHTML = "";
+  tabData.forEach((t, i) => {
+    const btn = document.createElement("button");
+    btn.className = "tab-btn" + (i === activeTab ? " active" : "");
+    btn.innerHTML = '<span class="tab-num">' + t.num + '</span>' + t.label;
+    btn.onclick = () => switchTab(i);
+    tabsBar.appendChild(btn);
+  });
+}
+
+function switchTab(i) {
+  if (i === activeTab) return;
+  document.getElementById("panel-" + activeTab).classList.remove("active");
+  activeTab = i;
+  document.getElementById("panel-" + activeTab).classList.add("active");
+  buildTabs();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (typeof MathJax !== "undefined" && MathJax.typeset) {
+    setTimeout(() => MathJax.typeset(), 100);
+  }
+}
+
+document.addEventListener("click", function(e) {
+  if (e.target.classList.contains("nav-btn")) {
+    const dir = e.target.dataset.dir;
+    if (dir === "prev" && activeTab > 0) switchTab(activeTab - 1);
+    if (dir === "next" && activeTab < 7) switchTab(activeTab + 1);
+  }
+});
+
+window.addEventListener("scroll", () => {
+  tabsWrap.classList.toggle("scrolled", window.scrollY > 60);
+});
+
+buildTabs();
+document.getElementById("panel-0").classList.add("active");
+
+document.querySelectorAll(".article").forEach((article, i) => {
+  const nav = document.createElement("div");
+  nav.className = "nav-footer";
+  nav.innerHTML =
+    '<button class="nav-btn" data-dir="prev" ' + (i === 0 ? "disabled" : "") + '>← Previous</button>' +
+    '<span class="nav-progress">' + (i + 1) + ' of 8</span>' +
+    '<button class="nav-btn" data-dir="next" ' + (i === 7 ? "disabled" : "") + '>Next →</button>';
+  article.appendChild(nav);
+});
+</script>
+</body>
+</html>
 
