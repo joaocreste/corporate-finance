@@ -955,9 +955,9 @@ body {
   <table class="data-table">
     <tr><th>Year</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">Beyond 3</th></tr>
     <tr><td>Dividends</td><td class="num">$1.30</td><td class="num">$1.80</td><td class="num">$2.00</td><td class="num">$2.06 (growing at 3%)</td></tr>
-    <tr><td>Share price at yr 3</td><td class="num">—</td><td class="num">—</td><td class="num" colspan="2">$P_3 = \frac{2.06}{0.07 - 0.03} = \$51.50$</td></tr>
+    <tr><td>Share price at yr 3</td><td class="num">—</td><td class="num">—</td><td class="num" colspan="2">$P_3 = \frac{2.06}{0.07 - 0.03} = 51.50$</td></tr>
   </table>
-  <p>Discounting all cash flows: $P_0 = \frac{1.30}{1.07} + \frac{1.80}{1.07^2} + \frac{2.00 + 51.50}{1.07^3} = \$46.46$</p>
+  <p>Discounting all cash flows: $P_0 = \frac{1.30}{1.07} + \frac{1.80}{1.07^2} + \frac{2.00 + 51.50}{1.07^3} = 46.46$</p>
 </div>
 </div>
 
@@ -985,7 +985,8 @@ body {
   <div class="ex-label">Worked Example</div>
   <div class="ex-title">LVMH Bond Pricing</div>
   <p>Maturity: 3 years. Face value: €1,000. Coupon rate: 15%. YTM: 6%.</p>
-  <p style="text-align:center;font-size:16px;">$P = \frac{150}{1.06} + \frac{150}{1.06^2} + \frac{150 + 1{,}000}{1.06^3} = €1{,}240.57$</p>
+  <p style="text-align:center;font-size:16px;">$P = \frac{150}{1.06} + \frac{150}{1.06^2} + \frac{150 + 1{,}000}{1.06^3} = 1{,}240.57$</p>
+  <p style="text-align:center;"><em>(Price in €)</em></p>
   <p>Since YTM (6%) &lt; coupon rate (15%), the bond trades at a <strong>premium</strong>.</p>
 </div>
 
@@ -1516,7 +1517,7 @@ body {
 <h4>Step 2 — Terminal Value</h4>
 <div class="formula-box">
   <div class="label">Terminal Value (Gordon Growth)</div>
-  $$TV = \frac{FCF_{2019}}{WACC - g} = \frac{1{,}056}{6.50\% - 1.50\%} = €21{,}441\text{m}$$
+  $$TV = \frac{FCF_{2019}}{WACC - g} = \frac{1{,}056}{0.065 - 0.015} = 21{,}441 \text{ m}$$
 </div>
 
 <h4>Step 3 — Enterprise &amp; Equity Value</h4>
@@ -2083,6 +2084,342 @@ body {
 </article>
 </div>
 
+<!-- ═══════════ TAB IX: FORMULAE ═══════════ -->
+<div class="panel" id="panel-8">
+<article class="article">
+<div class="hero">
+  <div class="hero-label">Reference</div>
+  <h2>List of Formulae</h2>
+  <div class="subtitle">Every exam formula — explained</div>
+  <p class="lede">This section contains the seven formulae provided in the examination, plus key additional course formulae. Each is presented with its full notation, a plain-English explanation of what it does, when to use it, and what every variable means. Commit the logic to memory, not just the symbols.</p>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Exam Sheet Formulae</div>
+  <div class="toc-item"><span class="toc-num">1.</span>Correlation Coefficient</div>
+  <div class="toc-item"><span class="toc-num">2.</span>Portfolio Variance (two-asset)</div>
+  <div class="toc-item"><span class="toc-num">3.</span>Sharpe Ratio</div>
+  <div class="toc-item"><span class="toc-num">4.</span>Beta</div>
+  <div class="toc-item"><span class="toc-num">5.</span>MM Prop 2 — Cost of Equity (with taxes)</div>
+  <div class="toc-item"><span class="toc-num">6.</span>MM Prop 2 — Cost of Equity (no taxes)</div>
+  <div class="toc-item"><span class="toc-num">7.</span>Unlevered (Asset) Beta</div>
+  <div class="toc-title" style="margin-top:14px;padding-top:10px;border-top:1px solid var(--rule);">Additional Course Formulae</div>
+  <div class="toc-item"><span class="toc-num">8.</span>CAPM</div>
+  <div class="toc-item"><span class="toc-num">9.</span>WACC</div>
+  <div class="toc-item"><span class="toc-num">10.</span>Gordon Growth Model</div>
+  <div class="toc-item"><span class="toc-num">11.</span>NPV</div>
+  <div class="toc-item"><span class="toc-num">12.</span>Bond Price</div>
+  <div class="toc-item"><span class="toc-num">13.</span>Perpetuity &amp; Growing Perpetuity</div>
+  <div class="toc-item"><span class="toc-num">14.</span>DuPont (ROE)</div>
+  <div class="toc-item"><span class="toc-num">15.</span>MM Prop 1 (with taxes)</div>
+  <div class="toc-item"><span class="toc-num">16.</span>Put-Call Parity</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<div class="principle">
+  <div class="num">Examination Formula Sheet</div>
+  <div class="statement">The 7 formulae provided in the exam</div>
+</div>
+<!-- ═══════════════════════════════════════ -->
+
+<!-- ── 1 ── -->
+<div class="section">
+<h3>1. Correlation Coefficient</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$\rho_{XY} = \frac{\mathrm{Cov}(X,\,Y)}{\sigma_X \;\sigma_Y}$$
+</div>
+<p><strong>What it does:</strong> Standardises the covariance between two assets onto a scale from −1 to +1. It tells you how — and how strongly — two assets' returns move together.</p>
+<p><strong>When to use it:</strong> Whenever you need to assess diversification potential, or as an input to the portfolio variance formula.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$\rho_{XY}$</td><td>Correlation coefficient. +1 = perfect positive; 0 = no linear relationship; −1 = perfect negative.</td></tr>
+  <tr><td>$\mathrm{Cov}(X,Y)$</td><td>Covariance of returns between X and Y.</td></tr>
+  <tr><td>$\sigma_X,\;\sigma_Y$</td><td>Standard deviations of X and Y.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">Rearranged Form</div>
+  <p>$\mathrm{Cov}(X,Y) = \rho_{XY}\,\sigma_X\,\sigma_Y$. This is the form you substitute directly into the portfolio variance formula.</p>
+</div>
+</div>
+
+<!-- ── 2 ── -->
+<div class="section">
+<h3>2. Portfolio Variance (Two-Asset)</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$\sigma_P^2 = a^2\,\sigma_X^2 + b^2\,\sigma_Y^2 + 2ab\,\rho_{XY}\,\sigma_X\,\sigma_Y$$
+</div>
+<p><strong>What it does:</strong> Calculates total variance of a two-asset portfolio. The third term — the cross-term — is the key: when $\rho &lt; 1$, it shrinks, pulling portfolio risk <em>below</em> the weighted average. This <em>is</em> diversification.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$\sigma_P^2$</td><td>Portfolio variance.</td></tr>
+  <tr><td>$a,\;b$</td><td>Weights of assets X, Y in the portfolio ($a+b=1$).</td></tr>
+  <tr><td>$\sigma_X^2,\;\sigma_Y^2$</td><td>Individual asset variances.</td></tr>
+  <tr><td>$\rho_{XY}$</td><td>Correlation between X and Y.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">Key Intuition</div>
+  <p>If $\rho = 1$: no diversification — $\sigma_P = a\sigma_X + b\sigma_Y$. As $\rho$ falls towards −1, the cross-term turns negative, dramatically cutting risk. At $\rho = -1$, a zero-variance portfolio is theoretically possible.</p>
+</div>
+</div>
+
+<!-- ── 3 ── -->
+<div class="section">
+<h3>3. Sharpe Ratio</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$\text{Sharpe Ratio} = \frac{E(R_P) - r_f}{\sigma(R_P)}$$
+</div>
+<p><strong>What it does:</strong> Measures <em>reward per unit of total risk</em> — how much excess return above the risk-free rate you earn for each unit of standard deviation. Higher is better.</p>
+<p><strong>When to use it:</strong> To identify the tangent (optimal) portfolio on the efficient frontier, or to compare risk-adjusted performance across portfolios.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$E(R_P)$</td><td>Expected return of the portfolio.</td></tr>
+  <tr><td>$r_f$</td><td>Risk-free rate (e.g. UK gilt yield).</td></tr>
+  <tr><td>$\sigma(R_P)$</td><td>Standard deviation of portfolio returns (total risk).</td></tr>
+</table>
+</div>
+
+<!-- ── 4 ── -->
+<div class="section">
+<h3>4. Beta (β)</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$\beta_i = \frac{\mathrm{Cov}(r_i,\,r_m)}{\sigma_m^2} = \frac{\rho_{im}\,\sigma_i\,\sigma_m}{\sigma_m^2}$$
+</div>
+<p><strong>What it does:</strong> Measures the <em>systematic risk</em> of a security — its sensitivity to market movements. It is the slope of the regression of the security's returns against the market. Beta captures only the risk that <strong>cannot</strong> be diversified away.</p>
+<p><strong>When to use it:</strong> As the key input to CAPM. Also to judge how volatile a stock is relative to the market.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$\beta_i$</td><td>Beta of security $i$. Market = 1 by definition.</td></tr>
+  <tr><td>$\mathrm{Cov}(r_i, r_m)$</td><td>Covariance of security return with market return.</td></tr>
+  <tr><td>$\sigma_m^2$</td><td>Variance of market returns.</td></tr>
+  <tr><td>$\rho_{im}$</td><td>Correlation between security $i$ and the market.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">Interpretation Quick Reference</div>
+  <p>$\beta &gt; 1$: amplifies market moves (cyclical). $\beta \approx 1$: moves with market. $0 &lt; \beta &lt; 1$: defensive. $\beta = 0$: uncorrelated. $\beta &lt; 0$: inversely correlated (very rare).</p>
+</div>
+</div>
+
+<!-- ── 5 ── -->
+<div class="section">
+<h3>5. MM Proposition 2 — Cost of Equity (with Taxes)</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$r_E = r_A + \frac{D}{E}\,(r_A - r_D)(1 - t)$$
+</div>
+<p><strong>What it does:</strong> Determines the cost of equity for a levered firm <em>with corporate taxes</em>. As debt increases, equity becomes riskier — but the tax deductibility of interest partially dampens the rise in the cost of equity.</p>
+<p><strong>When to use it:</strong> Calculating cost of levered equity in real-world scenarios with taxes. This is the formula used in the Hampstead Electronics exam question.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$r_E$</td><td>Cost of equity (levered firm).</td></tr>
+  <tr><td>$r_A$</td><td>Cost of equity for an all-equity (unlevered) firm = return on assets.</td></tr>
+  <tr><td>$r_D$</td><td>Cost of debt (interest rate on borrowings).</td></tr>
+  <tr><td>$D/E$</td><td>Debt-to-equity ratio (market values).</td></tr>
+  <tr><td>$t$</td><td>Corporate tax rate.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">vs. No-Tax Version</div>
+  <p>The $(1-t)$ factor means $r_E$ rises <em>more slowly</em> with leverage than in a tax-free world. The government subsidises debt through tax deductions, so equity holders don't bear the full additional risk.</p>
+</div>
+</div>
+
+<!-- ── 6 ── -->
+<div class="section">
+<h3>6. MM Proposition 2 — Cost of Equity (No Taxes)</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$r_E = r_A + \frac{D}{E}\,(r_A - r_D)$$
+</div>
+<p><strong>What it does:</strong> Same structure as Formula 5 but in a <em>perfect capital market with no taxes</em>. The cost of equity rises linearly with leverage, and WACC stays constant regardless of D/E.</p>
+<p><strong>When to use it:</strong> In theoretical MM analysis under perfect-market assumptions. Also as a conceptual baseline to show that, in a frictionless world, capital structure is irrelevant.</p>
+<div class="insight">
+  <div class="ins-label">The Irrelevance Result</div>
+  <p>Without taxes, cheaper debt is exactly offset by rising equity cost. $WACC = r_A$ always. This underpins MM Proposition 1: firm value is unaffected by capital structure.</p>
+</div>
+</div>
+
+<!-- ── 7 ── -->
+<div class="section">
+<h3>7. Unlevered (Asset) Beta</h3>
+<div class="formula-box">
+  <div class="label">Formula</div>
+  $$\beta_{\text{asset}} = \frac{\beta_{\text{equity}}}{\left[1 + \dfrac{D}{E}(1 - T)\right]}$$
+</div>
+<p><strong>What it does:</strong> Strips out financial leverage from a company's observed equity beta, isolating <em>pure business risk</em>. The asset beta reflects only the risk of the firm's operations and industry, not its financing choices.</p>
+<p><strong>When to use it:</strong> (1) Comparing betas across firms with different capital structures. (2) Entering a new industry — unlever a peer's beta, then relever with your target D/E. (3) Recalculating cost of equity after a capital structure change.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$\beta_{\text{asset}}$</td><td>Unlevered beta — business risk only (no leverage effect).</td></tr>
+  <tr><td>$\beta_{\text{equity}}$</td><td>Levered (observed) beta — includes both business and financial risk.</td></tr>
+  <tr><td>$D/E$</td><td>Debt-to-equity ratio (market values).</td></tr>
+  <tr><td>$T$</td><td>Corporate tax rate.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">Relevering</div>
+  <p>Same formula rearranged: $\beta_{\text{equity}} = \beta_{\text{asset}} \times \left[1 + \frac{D}{E}(1-T)\right]$. Use this to apply the industry asset beta to your own target capital structure.</p>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<div class="principle">
+  <div class="num">Additional Course Formulae</div>
+  <div class="statement">Key formulae from the course (not on the exam sheet)</div>
+</div>
+<!-- ═══════════════════════════════════════ -->
+
+<!-- ── 8 ── -->
+<div class="section">
+<h3>8. CAPM</h3>
+<div class="formula-box">
+  <div class="label">Capital Asset Pricing Model</div>
+  $$E(r_i) = r_f + \beta_i\bigl(E(r_m) - r_f\bigr)$$
+</div>
+<p><strong>What it does:</strong> Determines the expected return on any asset based solely on its systematic risk (β). The return equals a time-value component ($r_f$) plus a risk component ($\beta$ × market risk premium).</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$E(r_i)$</td><td>Expected return on security $i$.</td></tr>
+  <tr><td>$r_f$</td><td>Risk-free rate.</td></tr>
+  <tr><td>$\beta_i$</td><td>Beta of security $i$ (from Formula 4).</td></tr>
+  <tr><td>$E(r_m) - r_f$</td><td>Market risk premium.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">Connection to WACC</div>
+  <p>CAPM gives you $r_E$ (cost of equity), which feeds directly into the WACC formula. Getting beta wrong cascades through the entire valuation.</p>
+</div>
+</div>
+
+<!-- ── 9 ── -->
+<div class="section">
+<h3>9. WACC</h3>
+<div class="formula-box">
+  <div class="label">Weighted Average Cost of Capital</div>
+  $$WACC = \frac{E}{D+E} \times r_E + \frac{D}{D+E} \times r_D \times (1-T)$$
+</div>
+<p><strong>What it does:</strong> Blends the cost of equity and the after-tax cost of debt, weighted by their proportions in the firm's capital structure. It is the discount rate used to value the firm's free cash flows in a DCF.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$E/(D+E)$</td><td>Weight of equity (market value).</td></tr>
+  <tr><td>$D/(D+E)$</td><td>Weight of debt (market value).</td></tr>
+  <tr><td>$r_E$</td><td>Cost of equity (from CAPM or DDM).</td></tr>
+  <tr><td>$r_D$</td><td>Pre-tax cost of debt (YTM on bonds or loan rate).</td></tr>
+  <tr><td>$T$</td><td>Corporate tax rate. The $(1-T)$ adjusts for the interest tax shield.</td></tr>
+</table>
+</div>
+
+<!-- ── 10 ── -->
+<div class="section">
+<h3>10. Gordon Growth Model</h3>
+<div class="formula-box">
+  <div class="label">Constant-Growth Dividend Discount Model</div>
+  $$P_0 = \frac{D_1}{r - g}$$
+</div>
+<p><strong>What it does:</strong> Values a share as the present value of an infinite stream of dividends growing at a constant rate $g$. Also used to calculate terminal value in DCF models.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$P_0$</td><td>Share price today.</td></tr>
+  <tr><td>$D_1$</td><td>Expected dividend <em>next year</em> (not the current dividend).</td></tr>
+  <tr><td>$r$</td><td>Required rate of return (cost of equity).</td></tr>
+  <tr><td>$g$</td><td>Constant dividend growth rate. Must have $r &gt; g$.</td></tr>
+</table>
+<div class="insight">
+  <div class="ins-label">Growth Rate</div>
+  <p>$g = b \times ROE$, where $b$ is the plowback (retention) ratio. Also: $r = D_1/P_0 + g$ (dividend yield + capital gain yield).</p>
+</div>
+</div>
+
+<!-- ── 11 ── -->
+<div class="section">
+<h3>11. Net Present Value</h3>
+<div class="formula-box">
+  <div class="label">NPV</div>
+  $$NPV = -C_0 + \sum_{t=1}^{T}\frac{C_t}{(1+r)^t}$$
+</div>
+<p><strong>What it does:</strong> Measures the value created by an investment — the present value of all future cash flows minus the initial outlay. $NPV &gt; 0$: accept. $NPV &lt; 0$: reject.</p>
+</div>
+
+<!-- ── 12 ── -->
+<div class="section">
+<h3>12. Bond Price</h3>
+<div class="formula-box">
+  <div class="label">Bond Valuation</div>
+  $$P = \sum_{t=1}^{T}\frac{C}{(1+YTM)^t} + \frac{F}{(1+YTM)^T}$$
+</div>
+<p><strong>What it does:</strong> The price of a bond is the PV of all coupon payments ($C$) plus the PV of the face value ($F$) at maturity, discounted at the yield to maturity.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$C$</td><td>Coupon payment (= face value × coupon rate).</td></tr>
+  <tr><td>$F$</td><td>Face (par) value, repaid at maturity.</td></tr>
+  <tr><td>$YTM$</td><td>Yield to maturity — the market's required return.</td></tr>
+  <tr><td>$T$</td><td>Number of periods to maturity.</td></tr>
+</table>
+</div>
+
+<!-- ── 13 ── -->
+<div class="section">
+<h3>13. Perpetuity &amp; Growing Perpetuity</h3>
+<div class="formula-box">
+  <div class="label">Perpetuity</div>
+  $$PV = \frac{C}{r}$$
+</div>
+<div class="formula-box">
+  <div class="label">Growing Perpetuity</div>
+  $$PV = \frac{C_1}{r - g}$$
+</div>
+<p>A perpetuity pays $C$ forever. A growing perpetuity pays $C_1$ next period, growing at rate $g$ forever (requires $r &gt; g$). The growing perpetuity formula is also used for the Gordon Growth Model and terminal value calculations.</p>
+</div>
+
+<!-- ── 14 ── -->
+<div class="section">
+<h3>14. DuPont Decomposition (ROE)</h3>
+<div class="formula-box">
+  <div class="label">Three-Part DuPont</div>
+  $$ROE = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{Profit Margin}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{Equity Multiplier}}$$
+</div>
+<p><strong>What it does:</strong> Decomposes ROE into three drivers: how much profit per unit of revenue (margin), how efficiently assets generate revenue (turnover), and how much leverage the firm uses (multiplier). Reveals <em>why</em> a firm earns its return.</p>
+</div>
+
+<!-- ── 15 ── -->
+<div class="section">
+<h3>15. MM Proposition 1 (with Taxes)</h3>
+<div class="formula-box">
+  <div class="label">Firm Value with Tax Shield</div>
+  $$V_L = V_U + \tau \times D$$
+</div>
+<p><strong>What it does:</strong> The value of a levered firm equals the value of an unlevered firm plus the present value of the interest tax shield ($\tau \times D$). This is why debt can increase firm value — but only up to the point where financial distress costs offset the benefit.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$V_L$</td><td>Value of the levered firm.</td></tr>
+  <tr><td>$V_U$</td><td>Value of the unlevered (all-equity) firm.</td></tr>
+  <tr><td>$\tau$</td><td>Corporate tax rate.</td></tr>
+  <tr><td>$D$</td><td>Market value of debt.</td></tr>
+</table>
+</div>
+
+<!-- ── 16 ── -->
+<div class="section">
+<h3>16. Put-Call Parity</h3>
+<div class="formula-box">
+  <div class="label">Put-Call Parity</div>
+  $$S + P = \frac{X}{(1+r_f)^t} + C$$
+</div>
+<p><strong>What it does:</strong> Links the prices of a share, a put, a call, and a risk-free bond. Holding a share + put must cost the same as holding a call + lending at the risk-free rate (same strike, same expiration). If parity is violated, an arbitrage opportunity exists.</p>
+<table class="data-table">
+  <tr><th>Variable</th><th>Meaning</th></tr>
+  <tr><td>$S$</td><td>Current share price.</td></tr>
+  <tr><td>$P$</td><td>Price of the put option.</td></tr>
+  <tr><td>$C$</td><td>Price of the call option.</td></tr>
+  <tr><td>$X$</td><td>Strike (exercise) price — same for put and call.</td></tr>
+  <tr><td>$r_f$</td><td>Risk-free rate.</td></tr>
+  <tr><td>$t$</td><td>Time to expiration.</td></tr>
+</table>
+</div>
+
+</article>
+</div>
+
 <!-- ════════════════ FOOTER ════════════════ -->
 <footer class="site-footer">
   Corporate Finance 201 · London Track · Professor Terence Tse · 2024
@@ -2099,6 +2436,7 @@ const tabData = [
   { num: "VI", label: "Valuation & WACC" },
   { num: "VII", label: "Cap Structure" },
   { num: "✎", label: "Test Yourself" },
+  { num: "∑", label: "Formulae" },
 ];
 
 const tabsBar = document.getElementById("tabsBar");
@@ -2132,7 +2470,7 @@ document.addEventListener("click", function(e) {
   if (e.target.classList.contains("nav-btn")) {
     const dir = e.target.dataset.dir;
     if (dir === "prev" && activeTab > 0) switchTab(activeTab - 1);
-    if (dir === "next" && activeTab < 7) switchTab(activeTab + 1);
+    if (dir === "next" && activeTab < 8) switchTab(activeTab + 1);
   }
 });
 
@@ -2148,8 +2486,8 @@ document.querySelectorAll(".article").forEach((article, i) => {
   nav.className = "nav-footer";
   nav.innerHTML =
     '<button class="nav-btn" data-dir="prev" ' + (i === 0 ? "disabled" : "") + '>← Previous</button>' +
-    '<span class="nav-progress">' + (i + 1) + ' of 8</span>' +
-    '<button class="nav-btn" data-dir="next" ' + (i === 7 ? "disabled" : "") + '>Next →</button>';
+    '<span class="nav-progress">' + (i + 1) + ' of 9</span>' +
+    '<button class="nav-btn" data-dir="next" ' + (i === 8 ? "disabled" : "") + '>Next →</button>';
   article.appendChild(nav);
 });
 </script>
